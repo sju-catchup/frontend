@@ -9,3 +9,4 @@ module.exports = function (app) {
     })
   );
 };
+//백엔드 서버로 api 요청을 위해 proxy 설정
