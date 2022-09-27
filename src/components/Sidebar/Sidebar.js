@@ -1,30 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import "./sidebar.scss";
+import "../../index.scss";
 import ReactPlayer from "react-player";
-const bannerStyles = {
-  width: "280px",
-  height: "93vh",
-  position: "fixed",
-  top: "7vh",
-  justifyContent: "space-between",
-  textAlign: "center",
-  fontWeight: "bold",
-};
 const Sidebar = () => {
   return (
-    <div>
-      <div
-        className="d-flex flex-column flex-shrink-0 p-3 bg-light"
-        style={bannerStyles}
-      >
+    <div className="sidebar">
+      <div className="d-flex flex-column flex-shrink-0 p-3 bg-light">
         <ul className="nav nav-pills flex-column ">
-          <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-4"
-              aria-current="page"
-            >
+          <li className="nav-item mt-3">
+            <Link to="#" className="nav-link  p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -40,11 +26,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-3"
-              aria-current="page"
-            >
+            <Link to="#" className="nav-link   p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -59,11 +41,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-4"
-              aria-current="page"
-            >
+            <Link to="#" className="nav-link  p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -79,11 +57,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-3"
-              aria-current="page"
-            >
+            <Link to="#" className="nav-link  p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

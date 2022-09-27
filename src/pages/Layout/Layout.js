@@ -13,7 +13,7 @@ function Home() {
       <main className="contents">
         <section>
           <header>
-            <h1>홈페이지</h1>
+            <h1>.</h1>
           </header>
         </section>
       </main>

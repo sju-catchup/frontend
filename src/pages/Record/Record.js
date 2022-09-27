@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import styles from "./record.module.scss";
+import "./record.scss";
 import "../../index.scss";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import Footer from "../../components/Footer/Footer";
 import "react-tabulator/lib/styles.css"; // required styles
 import "react-tabulator/lib/css/tabulator.min.css"; // theme
 import { ReactTabulator } from "react-tabulator";
@@ -12,12 +13,23 @@ const columns = [
   { title: "id", field: "id" },
   { title: "type", field: "type", align: "left" },
   // formatter: "tickCross",
-  { title: "start_time", field: "start_time" },
-  { title: "end_time", field: "end_time", align: "center" },
+  { title: "start time", field: "start_time" },
+  { title: "end time", field: "end_time", align: "center" },
   { title: "동영상 url", field: "url", align: "center", formatter: "link" },
   {
-    title: "cctv",
-    field: "passed",
+    title: "cctv id",
+    field: "id",
+    align: "center",
+  },
+
+  {
+    title: "cctv 좌표",
+    field: "position",
+    align: "center",
+  },
+  {
+    title: "cctv 위치",
+    field: "address",
     align: "center",
   },
 ];
@@ -28,7 +40,7 @@ const data = [
     start_time: "2022/09/27 13:30",
     end_time: "2022/09/27 13:34",
     url: "https://www.youtube.com/watch?v=VP5qPgZHqAs",
-    cctv: "",
+    cctv: "서",
   },
   {
     id: 2,
@@ -54,9 +66,13 @@ const Record = () => {
       <Sidebar />
       <main className="contents">
         <section>
+          <header>
+            <h1>이상행동 기록 조회</h1>
+          </header>
           <ReactTabulator columns={columns} data={data} />
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
