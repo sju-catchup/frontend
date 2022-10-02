@@ -1,15 +1,15 @@
 import React from "react";
-// import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./record.scss";
-import "../../index.scss";
-import Header from "../../components/Header/Header";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import Footer from "../../components/Footer/Footer";
+import "index.scss";
+import Header from "components/Header/Header";
+import Sidebar from "components/Sidebar/Sidebar";
+import Footer from "components/Footer/Footer";
 import "react-tabulator/lib/styles.css"; // required styles
 import "react-tabulator/lib/css/tabulator.min.css"; // theme
 import { ReactTabulator } from "react-tabulator";
-// import RecordService from "../../lib/api/RecordService";
+import RecordService from "lib/api/RecordService";
 const columns = [
   { title: "id", field: "id" },
   { title: "type", field: "type", align: "left" },
@@ -19,12 +19,12 @@ const columns = [
   { title: "동영상 url", field: "url", align: "center", formatter: "link" },
   {
     title: "cctv id",
-    field: "id",
+    field: "cctv_id",
     align: "center",
   },
 
   {
-    title: "cctv 좌표",
+    title: "cctv x좌표",
     field: "position",
     align: "center",
   },
@@ -34,33 +34,35 @@ const columns = [
     align: "center",
   },
 ];
-const data = [
-  {
-    id: 1,
-    type: "none",
-    start_time: "2022/09/27 13:30",
-    end_time: "2022/09/27 13:34",
-    url: "https://www.youtube.com/watch?v=VP5qPgZHqAs",
-    cctv: "서",
-  },
-  {
-    id: 2,
-    type: "abnormal",
-    start_time: "2022/09/27 13:30",
-    end_time: "2022/09/27 13:34",
-    url: "https://www.youtube.com/watch?v=VP5qPgZHqAs",
-    cctv: "",
-  },
-];
-
 const Record = () => {
-  // const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   RecordService.viewAllRecord().then((response) => {
-  //     console.log(response);
-  //     setData(response.data.data);
-  //   });
-  // }, []);
+  const listGroup = [];
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    RecordService.viewAllRecord()
+      .then((response) => {
+        console.log(response);
+        // setData(response.data);
+        response.data.map((obj) =>
+          listGroup.push({
+            id: obj.id,
+            type: obj.type,
+            start_time: obj.start_time,
+            end_time: obj.end_time,
+            url: obj.url,
+            cctv_id: obj.cctv.id,
+            position:
+              "( " + obj.cctv.position.x + ", " + obj.cctv.position.y + " )",
+            address: obj.cctv.address,
+          })
+        );
+
+        setList(listGroup);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log({ listGroup }, { list });
+  }, []);
   return (
     <div id="record">
       <Header />
@@ -70,7 +72,7 @@ const Record = () => {
           <header>
             <h1>이상행동 기록 조회</h1>
           </header>
-          <ReactTabulator columns={columns} data={data} />
+          <ReactTabulator columns={columns} data={list} />
         </section>
       </main>
       <Footer />
