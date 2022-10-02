@@ -14,11 +14,17 @@
     "react-dom": "^18.2.0",
     "react-player": "^2.11.0",
     "react-router-dom": "^6.4.1",
-    "react-scripts": "5.0.1",
     "react-tabulator": "^0.18.1",
     "sass": "^1.55.0",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.24.0",
+    "eslint-plugin-react": "^7.31.8",
+    "gh-pages": "^4.0.0",
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

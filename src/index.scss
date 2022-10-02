@@ -12,7 +12,13 @@ code {
     monospace;
 }
 .contents {
-  width: calc(90% - 280px);
-  padding: 20px 40px;
-  margin: 7vh 280px;
+  display: inline-block;
+  position: relative;
+  width: calc(100% - 280px);
+  height: auto;
+  padding: 50px 15% 20px 60px;
+  h1 {
+    padding: 10px;
+    margin-bottom: 30px;
+  }
 }

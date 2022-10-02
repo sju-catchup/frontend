@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "./header.scss";
 
 const Header = () => {
@@ -20,7 +19,6 @@ const Header = () => {
           <Navbar.Brand href="/" className="fs-3">
             CatchUp
           </Navbar.Brand>
-          {/* <Link to="/">智</Link> */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
@@ -33,14 +31,6 @@ const Header = () => {
               <Nav.Link href="/record" className="p-3">
                 Lorem
               </Nav.Link>
-              {/* <NavDropdown
-                title="language"
-                id="collasible-nav-dropdown"
-                className="p-2 fs-10"
-              >
-                <NavDropdown.Item href="#action/3.1">Korean</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">English</NavDropdown.Item>
-              </NavDropdown> */}
             </Nav>
             <Nav>
               <Nav.Link href="/login" className="p-3">
@@ -60,8 +50,6 @@ const Header = () => {
         </Container>
       </Navbar>
     </div>
-    //     </div>
-    // </div>
   );
 };
 

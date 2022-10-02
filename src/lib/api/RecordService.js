@@ -1,8 +1,9 @@
 import axios from "axios";
-const USER_API_BASE_URL = "/api";
+//const USER_API_BASE_URL = "/api";
 class RecordService {
   viewAllRecord() {
-    return axios.get(USER_API_BASE_URL + "/human-action", JSON.stringify(), {
+    return axios.get("/data", JSON.stringify(), {
+      //human_action
       headers: {
         "Content-Type": `application/json`,
       },

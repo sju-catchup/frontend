@@ -9,6 +9,13 @@
     color: white;
     opacity: 0.5;
   }
+  .header-inner-container > a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 .header-empty-space {
   height: 7vh;

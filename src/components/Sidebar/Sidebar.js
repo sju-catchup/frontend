@@ -1,30 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import ReactPlayer from "react-player";
-const bannerStyles = {
-  width: "280px",
-  height: "93vh",
-  position: "fixed",
-  top: "7vh",
-  justifyContent: "space-between",
-  textAlign: "center",
-  fontWeight: "bold",
-};
+import "./sidebar.scss";
+// import ReactPlayer from "react-player";
 const Sidebar = () => {
   return (
-    <div>
-      <div
-        className="d-flex flex-column flex-shrink-0 p-3 bg-light"
-        style={bannerStyles}
-      >
+    <div className="sidebar">
+      <div className="d-flex flex-column flex-shrink-0 p-3 bg-light">
         <ul className="nav nav-pills flex-column ">
-          <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-4"
-              aria-current="page"
-            >
+          <li className="nav-item mt-3">
+            <Link to="#" className="nav-link  p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -40,11 +25,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-3"
-              aria-current="page"
-            >
+            <Link to="#" className="nav-link   p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -59,11 +40,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-4"
-              aria-current="page"
-            >
+            <Link to="#" className="nav-link  p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -79,11 +56,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link
-              to="#"
-              className="nav-link  link-dark p-3"
-              aria-current="page"
-            >
+            <Link to="#" className="nav-link  p-3" aria-current="page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -103,14 +76,27 @@ const Sidebar = () => {
           {/* <hr /> */}
         </ul>
         <div>
-          <ReactPlayer
+          {/* <ReactPlayer
             className="player"
             url={"https://www.youtube.com/watch?v=VP5qPgZHqAs"}
             controls
             playing={false}
             width="250px"
             height="180px"
-          />
+          /> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="80"
+            fill="currentColor"
+            className="bi bi-map"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fillRule="evenodd"
+              d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"
+            />
+          </svg>
         </div>
       </div>
     </div>
