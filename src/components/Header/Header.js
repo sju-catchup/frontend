@@ -25,8 +25,8 @@ const Header = () => {
               <Nav.Link href="/record" className="p-3">
                 기록 조회
               </Nav.Link>
-              <Nav.Link href="/record" className="p-3">
-                Ipsum
+              <Nav.Link href="/map/cctv" className="p-3">
+                지도
               </Nav.Link>
               <Nav.Link href="/record" className="p-3">
                 Lorem
