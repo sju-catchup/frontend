@@ -6,10 +6,9 @@ import Home from "./pages/Home/Home";
 import Record from "./pages/Record/Record";
 import CCTV from "./pages/Map/CCTV";
 import reportWebVitals from "./reportWebVitals";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/record" element={<Record />} />
