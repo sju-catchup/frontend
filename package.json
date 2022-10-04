@@ -28,7 +28,7 @@
     "gh-pages": "^4.0.0",
     "react-scripts": "5.0.1"
   },
-  "homepage": "https://sju-catchup.github.io/fe/",
+  "homepage": "https://sju-catchup.github.io/frontend/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
