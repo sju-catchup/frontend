@@ -1,9 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import styles from "./home.module.scss";
-import Header from "../../components/Header/Header";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import Footer from "../../components/Footer/Footer";
+import styles from "./Home.module.scss";
+import Header from "components/Header/Header";
+import Sidebar from "components/Sidebar/Sidebar";
+import Footer from "components/Footer/Footer";
 
 function Home() {
   return (

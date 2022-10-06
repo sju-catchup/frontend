@@ -24,7 +24,7 @@ const columns = [
   },
 
   {
-    title: "cctv x좌표",
+    title: "cctv 좌표",
     field: "position",
     align: "center",
   },
@@ -40,16 +40,16 @@ const Record = () => {
   useEffect(() => {
     RecordService.viewAllRecord()
       .then((response) => {
-        console.log(response);
+        console.log(response.data.HumanAction);
         // setData(response.data);
-        response.data.map((obj) =>
+        response.data.HumanAction.map((obj) =>
           listGroup.push({
             id: obj.id,
             type: obj.type,
             start_time: obj.start_time,
             end_time: obj.end_time,
-            url: obj.url,
-            cctv_id: obj.cctv.id,
+            url: obj.uri,
+            cctv_id: obj.cctv_id,
             position:
               "( " + obj.cctv.position.x + ", " + obj.cctv.position.y + " )",
             address: obj.cctv.address,
