@@ -28,8 +28,8 @@ const Header = () => {
               <Nav.Link href={BASE_URL + "/map/cctv"} className="p-3">
                 지도
               </Nav.Link>
-              <Nav.Link href="/record" className="p-3">
-                Lorem
+              <Nav.Link href={BASE_URL + "/human-action"} className="p-3">
+                HumanAction
               </Nav.Link>
             </Nav>
             <Nav>
