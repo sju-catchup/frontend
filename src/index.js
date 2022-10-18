@@ -5,8 +5,11 @@ import "index.scss";
 import Home from "pages/home/Home.js";
 import Record from "pages/Record/Record";
 import HumanAction from "pages/HumanAction/HumanAction";
+import LocalAlarm from "pages/HumanAction/Local";
 import CCTV from "pages/Map/CCTV";
-import CCTV2 from "pages/Map/CCTV_Alarm";
+import CCTV3 from "pages/Map/Numbering";
+import CCTV4 from "pages/Map/Html";
+import LocalMap from "pages/Map/Local";
 // import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,8 +19,11 @@ root.render(
       <Route path="/" element={<Home />} />
       <Route path="/record" element={<Record />} />
       <Route path="/map/cctv" element={<CCTV />} />
-      <Route path="/map/cctv2" element={<CCTV2 />} />
+      <Route path="/map/cctv3" element={<CCTV3 />} />
+      <Route path="/map/cctv4" element={<CCTV4 />} />
       <Route path="/human-action" element={<HumanAction />} />
+      <Route path="/localAlarm" element={<LocalAlarm />} />
+      <Route path="/localMap" element={<LocalMap />} />
     </Routes>
   </BrowserRouter>
 );
