@@ -4,48 +4,63 @@
   },
   "HumanAction": [
     {
-      "id": 5,
-      "type": "폭행",
-      "start_time": "2022/09/30 03:38",
-      "end_time": "2022/09/30 03:40",
-      "url": "https://www.youtube.com/watch?v=VP5qPgZHqAs",
+      "id": 1,
+      "createdAt": "2022-10-01T11:06:20.089Z",
+      "updatedAt": "2022-10-01T14:31:12.588Z",
+      "type": "Attack",
+      "start_time": "2022-10-01T10:39:29.000Z",
+      "end_time": "2022-10-01T10:39:29.000Z",
+      "uri": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "cctv_id": 7,
       "cctv": {
-        "id": "c32",
+        "id": 7,
+        "createdAt": "2022-10-01T10:40:29.455Z",
+        "updatedAt": "2022-10-01T10:40:29.455Z",
         "position": {
-          "x": 35.23,
-          "y": 123.14
+          "x": "127.07431",
+          "y": "37.54883"
         },
-        "address": "서울시 송파구"
+        "address": "광진구 군자동 세종대학교 대양홀"
+      }
+    },
+    {
+      "id": 2,
+      "createdAt": "2022-10-01T11:08:02.973Z",
+      "updatedAt": "2022-10-01T14:31:21.294Z",
+      "type": "Attack",
+      "start_time": "2022-10-01T11:06:20.000Z",
+      "end_time": "2022-10-01T11:06:59.000Z",
+      "uri": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "cctv_id": 8,
+      "cctv": {
+        "id": 8,
+        "createdAt": "2022-10-01T10:41:11.130Z",
+        "updatedAt": "2022-10-01T10:41:11.130Z",
+        "position": {
+          "x": "127.07391",
+          "y": "37.54945"
+        },
+        "address": "광진구 군자동 세종대학교 군자관"
       }
     },
     {
       "id": 3,
-      "type": "폭행",
-      "start_time": "2022/09/30 03:38",
-      "end_time": "2022/09/30 03:40",
-      "url": "https://www.youtube.com/watch?v=VP5qPgZHqAs",
+      "createdAt": "2022-10-01T11:08:28.126Z",
+      "updatedAt": "2022-10-01T14:31:36.075Z",
+      "type": "Attack",
+      "start_time": "2022-10-01T11:08:03.000Z",
+      "end_time": "2022-10-01T11:09:03.000Z",
+      "uri": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "cctv_id": 9,
       "cctv": {
-        "id": "c32",
+        "id": 9,
+        "createdAt": "2022-10-01T10:41:54.721Z",
+        "updatedAt": "2022-10-01T10:41:54.721Z",
         "position": {
-          "x": 35.23,
-          "y": 123.14
+          "x": "127.07459",
+          "y": "37.54992"
         },
-        "address": "서울시 송파구"
-      }
-    },
-    {
-      "id": 1,
-      "type": "폭행",
-      "start_time": "2022/09/30 03:38",
-      "end_time": "2022/09/30 03:40",
-      "url": "https://www.youtube.com/watch?v=VP5qPgZHqAs",
-      "cctv": {
-        "id": "c32",
-        "position": {
-          "x": 35.23,
-          "y": 123.14
-        },
-        "address": "서울시 송파구"
+        "address": "광진구 군자동 세종대학교 세종관"
       }
     }
   ],
