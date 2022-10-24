@@ -16,6 +16,31 @@ code {
   margin: 0 auto;
   h1 {
     padding: 10px;
-    margin-bottom: 30px;
+    margin: 30px 0;
   }
+}
+
+#cctv_marker_number {
+  background-color: black;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 15px;
+  color: white;
+}
+#cctv_marker_dot {
+  background-color: black;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+#cctv_marker_number_red {
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 15px;
+  color: white;
 }
