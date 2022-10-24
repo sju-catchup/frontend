@@ -22,7 +22,7 @@ root.render(
       <Route path="/map/cctv3" element={<CCTV3 />} />
       <Route path="/map/cctv4" element={<CCTV4 />} />
       <Route path="/human-action" element={<HumanAction />} />
-      <Route path="/localAlarm" element={<LocalAlarm />} />
+      <Route path="/local" element={<LocalAlarm />} />
       <Route path="/localMap" element={<LocalMap />} />
     </Routes>
   </BrowserRouter>

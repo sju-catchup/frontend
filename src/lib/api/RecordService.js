@@ -1,5 +1,5 @@
 import axios from "axios";
-const base_url = "https://df8c-115-91-214-5.jp.ngrok.io";
+const base_url = "https://fancy-heads-thank-175-196-45-162.loca.lt";
 const USER_API_BASE_URL = "/human-action";
 class RecordService {
   viewAllRecord() {
