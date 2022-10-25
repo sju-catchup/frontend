@@ -3,15 +3,17 @@
   width: 50%;
 }
 .map {
-  height: 500px;
+  height: 700px;
   width: 40%;
   float: left;
   padding: 10px;
 }
 .container {
   > div:nth-child(2) {
-    width: 60%;
+    width: 55%;
     display: inline-block;
+    border: 1px solid gray;
+    margin-left: 10px;
   }
 }
 #cctv_marker {
