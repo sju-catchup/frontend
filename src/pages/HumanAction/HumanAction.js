@@ -5,7 +5,7 @@ import "index.scss";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import styles from "./humanAction.module.scss";
-import * as HttpsService from "lib/api/HttpsService";
+import HttpsService from "lib/api/HttpsService";
 import "react-tabulator/lib/styles.css"; // required styles
 import "react-tabulator/lib/css/tabulator_simple.min.css"; // theme
 import { ReactTabulator } from "react-tabulator";
@@ -60,18 +60,48 @@ const Record = () => {
   const [loading, setloading] = useState(true);
   var markerPosition;
   const container = useRef(null);
-  const options = {
-    center: new naver.maps.LatLng(37.54948, 127.07522),
-    level: 3,
-  };
 
-  const socket = io("https://sharp-vans-pull-175-196-45-162.loca.lt", {
+  const socket = io("https://sweet-plants-lead-175-196-45-162.loca.lt/", {
     transports: ["websocket"],
   });
 
   useEffect(() => {
-    const map = new naver.maps.Map(container.current, options);
+    const map = new naver.maps.Map(container.current, {
+      //37.5505118!4d127.0666035
+      center: new naver.maps.LatLng(37.5505118, 127.0666035),
+      level: 3,
+      zoom: 18,
+      minZoom: 7, //지도의 최소 줌 레벨
+      zoomControl: true, //줌 컨트롤의 표시 여부
+      zoomControlOptions: {
+        //줌 컨트롤의 옵션
+        position: naver.maps.Position.TOP_LEFT,
+      },
+    });
     //https 통신
+    HttpsService.viewAllCCTV().then((response) => {
+      console.log(response.data);
+      response.data.CCTV.map((obj) => {
+        markerPosition = new naver.maps.LatLng(
+          parseFloat(obj.position.x),
+          parseFloat(obj.position.y)
+        );
+        new naver.maps.Marker({
+          map,
+          title: obj.address,
+          position: markerPosition,
+          icon: {
+            content: [
+              '<div className="cs_mapbridge" id="cctv_marker_dot" >',
+              "</div>",
+            ].join(""),
+            size: new naver.maps.Size(10, 10),
+            anchor: new naver.maps.Point(19, 58),
+          },
+          draggable: true,
+        });
+      });
+    });
     HttpsService.viewAllRecord()
       .then((response) => {
         // console.log(response.data.HumanAction);
@@ -92,8 +122,8 @@ const Record = () => {
             //map 데이터
 
             (markerPosition = new naver.maps.LatLng(
-              parseFloat(obj.cctv.position.y),
-              parseFloat(obj.cctv.position.x)
+              parseFloat(obj.cctv.position.x),
+              parseFloat(obj.cctv.position.y)
             ));
           new naver.maps.Marker({
             map,
@@ -127,6 +157,9 @@ const Record = () => {
     socket.on("connect", () => {
       console.log(socket.id); // x8WIv7-mJelg7on_ALbx
     });
+    socket.on("disconnect", () => {
+      console.log("disconnect");
+    });
     socket.on("New_HumanAction", (data) => {
       console.log({ list });
       const obj = data.HumanAction;
@@ -157,8 +190,8 @@ const Record = () => {
         }),
           //map 데이터
           (markerPosition = new naver.maps.LatLng(
-            parseFloat(obj.cctv.position.y),
-            parseFloat(obj.cctv.position.x)
+            parseFloat(obj.cctv.position.x),
+            parseFloat(obj.cctv.position.y)
           ));
         new naver.maps.Marker({
           map,
@@ -214,8 +247,8 @@ const Record = () => {
           }),
             //map 데이터
             (markerPosition = new naver.maps.LatLng(
-              parseFloat(obj.cctv.position.y),
-              parseFloat(obj.cctv.position.x)
+              parseFloat(obj.cctv.position.x),
+              parseFloat(obj.cctv.position.y)
             ));
           new naver.maps.Marker({
             map,
