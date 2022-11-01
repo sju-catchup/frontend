@@ -72,6 +72,27 @@ const Map = () => {
         origin: new naver.maps.Point(seq * 29, 0),
       });
     }
+    //마커 이미지 사용
+    //   (markerPosition = new naver.maps.LatLng(
+    //     parseFloat(obj.cctv.position.y),
+    //     parseFloat(obj.cctv.position.x)
+    //   ));
+    // new naver.maps.Marker({
+    //   map,
+    //   title: "Green",
+    //   position: markerPosition,
+    //   icon: {
+    //     content:
+    //       "<img src=" +
+    //       pin +
+    //       ' alt="" ' +
+    //       'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+    //       '-webkit-user-select: none; position: absolute; width: 22px; height: 35px; left: 0px; top: 0px;">',
+    //     size: new naver.maps.Size(10, 10),
+    //     anchor: new naver.maps.Point(19, 58),
+    //   },
+    //   draggable: true,
+    // });
   }, []);
   return (
     <div className="container">

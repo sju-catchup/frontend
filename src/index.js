@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "index.scss";
 import Home from "pages/home/Home.js";
-import Record from "pages/Record/Record";
 import HumanAction from "pages/HumanAction/HumanAction";
 import LocalAlarm from "pages/HumanAction/Local";
 import CCTV from "pages/Map/CCTV";
@@ -17,7 +16,6 @@ root.render(
   <BrowserRouter basename="frontend">
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/record" element={<Record />} />
       <Route path="/map/cctv" element={<CCTV />} />
       <Route path="/map/cctv3" element={<CCTV3 />} />
       <Route path="/map/cctv4" element={<CCTV4 />} />

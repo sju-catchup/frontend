@@ -7,7 +7,7 @@ import Footer from "components/Footer/Footer";
 
 import warn from "assets/warn.png";
 
-import MapService from "lib/api/MapService";
+import MapService from "lib/api/HttpsService";
 // import response from "assets/data.json";
 const { naver } = window;
 function CCTV() {
