@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "react-bootstrap/Navbar";
 import "./header.scss";
-const BASE_URL = process.env.PUBLIC_URL;
+// const BASE_URL = process.env.PUBLIC_URL;
 const Header = () => {
   return (
     <div>
@@ -16,19 +16,19 @@ const Header = () => {
         className="header-container"
       >
         <Container className="header-inner-container">
-          <Navbar.Brand href={BASE_URL} className="fs-3">
+          <Navbar.Brand href="/" className="fs-3">
             CatchUp
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              <Nav.Link href={BASE_URL + "/record"} className="p-3">
+              <Nav.Link href="/record" className="p-3">
                 기록 조회
               </Nav.Link>
-              <Nav.Link href={BASE_URL + "/map/cctv"} className="p-3">
+              <Nav.Link href="/map/cctv" className="p-3">
                 지도
               </Nav.Link>
-              <Nav.Link href={BASE_URL + "/human-action"} className="p-3">
+              <Nav.Link href="/human-action" className="p-3">
                 HumanAction
               </Nav.Link>
             </Nav>

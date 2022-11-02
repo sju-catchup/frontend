@@ -22,7 +22,7 @@ const Record = () => {
   var markerPosition;
   const container = useRef(null);
 
-  const socket = io("https://sweet-plants-lead-175-196-45-162.loca.lt/", {
+  const socket = io("https://poor-spies-jam-106-101-129-129.loca.lt", {
     transports: ["websocket"],
   });
   useEffect(() => {

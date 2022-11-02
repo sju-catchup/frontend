@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://rare-squids-pick-175-196-45-162.loca.lt";
+const BASE_URL = "https://violet-grapes-rest-106-101-129-129.loca.lt";
 class HttpsService {
   viewAllCCTV() {
     return axios.get(BASE_URL + "/cctv");

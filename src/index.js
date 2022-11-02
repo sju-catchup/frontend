@@ -12,8 +12,7 @@ import LocalMap from "pages/Map/Local";
 // import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <BrowserRouter basename={process.env.PUBLIC_URL}>
-  <BrowserRouter basename="frontend">
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/map/cctv" element={<CCTV />} />
