@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./cctv.scss";
 import Header from "components/Header/Header";
@@ -7,34 +7,32 @@ import Footer from "components/Footer/Footer";
 
 import warn from "assets/warn.png";
 
-import MapService from "lib/api/HttpsService";
-// import response from "assets/data.json";
+// import MapService from "lib/api/MapService";
+import response from "assets/data.json";
 const { naver } = window;
 function CCTV() {
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
   const container = useRef(null);
   const options = {
     center: new naver.maps.LatLng(37.54948, 127.07522),
     level: 3,
   };
   useEffect(() => {
-    // server;
-    MapService.viewAllRecord()
-      .then((response) => {
-        console.log(response.data.CCTV);
-        setData(response.data.CCTV);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // // server;
+    // MapService.viewAllRecord()
+    //   .then((response) => {
+    //     console.log(response.data.CCTV);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
     //json
-    // console.log(response.CCTV);
+    console.log(response.CCTV);
 
     const map = new naver.maps.Map(container.current, options);
     //cctv 위치
-    console.log(data);
-    data.map((e) => {
+    response.CCTV.map((e) => {
       const markerPosition = new naver.maps.LatLng(
         parseFloat(e.position.y),
         parseFloat(e.position.x)

@@ -11,14 +11,59 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
 .contents {
-  display: inline-block;
-  position: relative;
-  width: calc(100% - 280px);
-  height: 5000px;
-  padding: 50px 15% 20px 60px;
+  padding-top: 3%;
+  width: 90%;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: block;
   h1 {
     padding: 10px;
-    margin-bottom: 30px;
+    margin: 30px 0;
+    text-align: center;
   }
 }
+
+#cctv_marker_dot {
+  background-color: black;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin: 5px 0px 0px 2px;
+}
+#cctv_marker_number,
+#cctv_marker_number_red {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px 15px 0 15px;
+  transform: rotate(45deg);
+  text-align: center;
+  > div {
+    transform: rotate(315deg);
+    background-color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 15px;
+    position: relative;
+    top: 4px;
+    left: 4px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 550;
+  }
+}
+#cctv_marker_number {
+  background-color: black;
+  color: black;
+}
+#cctv_marker_number_red {
+  background-color: red;
+  color: red;
+}
+
+// .tabulator-row .tabulator-cell[tabulator-field="id"],
+// tabulator-col-title:first-child {
+//   width: 10% !important;
+//   background-color: red;
+// }

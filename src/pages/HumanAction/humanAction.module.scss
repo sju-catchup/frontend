@@ -1,0 +1,28 @@
+.tabulator {
+  display: inline-block;
+  width: 50%;
+}
+.map {
+  height: 700px;
+  width: 40%;
+  float: left;
+  padding: 10px;
+  border: 1px solid gray;
+}
+.container {
+  > div:nth-child(2) {
+    width: 55%;
+    display: inline-block;
+    border: 1px solid gray;
+    margin-left: 10px;
+  }
+}
+#cctv_marker {
+  background-color: black;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+}

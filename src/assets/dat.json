@@ -1,0 +1,20 @@
+{
+  "id": 13,
+  "createdAt": "2022-10-10T11:06:20.089Z",
+  "updatedAt": "2022-10-01T14:31:12.588Z",
+  "type": "Attack",
+  "start_time": "2022-10-01T10:39:29.000Z",
+  "end_time": "2022-10-01T10:39:29.000Z",
+  "uri": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  "cctv_id": 7,
+  "cctv": {
+    "id": 7,
+    "createdAt": "2022-10-01T10:40:29.455Z",
+    "updatedAt": "2022-10-01T10:40:29.455Z",
+    "position": {
+      "x": "127.07431",
+      "y": "37.54883"
+    },
+    "address": "광진구 군자동 세종대학교 대양홀"
+  }
+}
