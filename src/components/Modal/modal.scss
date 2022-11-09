@@ -48,7 +48,8 @@
   text-align: center;
   .subjectList {
     text-align: start;
-    // padding: 0 49px;
+    // overflow-y: scroll;
+    // max-height: 200px;
     button {
       width: 100px;
       height: 100px;

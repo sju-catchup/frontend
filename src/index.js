@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "index.scss";
 import Home from "pages/home/Home.js";
 import HumanAction from "pages/HumanAction/HumanAction";
+import Detection from "pages/Detection/Detection";
 import LocalAlarm from "pages/HumanAction/Local";
 import CCTV from "pages/Map/CCTV";
 import CCTV3 from "pages/Map/Numbering";
@@ -16,6 +17,7 @@ root.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/human-action" element={<HumanAction />} />
+      <Route path="/detection/:id" element={<Detection />} />
       <Route path="/map/cctv" element={<CCTV />} />
       <Route path="/map/cctv3" element={<CCTV3 />} />
       <Route path="/map/cctv4" element={<CCTV4 />} />

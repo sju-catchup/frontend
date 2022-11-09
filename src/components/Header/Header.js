@@ -22,14 +22,14 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              <Nav.Link href="/record" className="p-3">
-                기록 조회
-              </Nav.Link>
-              <Nav.Link href="/map/cctv" className="p-3">
-                지도
-              </Nav.Link>
               <Nav.Link href={BASE_URL + "/human-action"} className="p-3">
                 HumanAction
+              </Nav.Link>
+              <Nav.Link href={BASE_URL + "/Detection"} className="p-3">
+                Detection
+              </Nav.Link>
+              <Nav.Link href={BASE_URL + "/local"} className="p-3">
+                HumanAction-local
               </Nav.Link>
             </Nav>
             <Nav>

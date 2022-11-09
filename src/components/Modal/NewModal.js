@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-// import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./modal.scss";
 // eslint-disable-next-line react/prop-types
 function Modal({
@@ -13,10 +13,14 @@ function Modal({
   uri,
 }) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
+  const navigate = useNavigate();
   function selectAgain() {
     setPrevModalOpen(true);
     closeModal();
     setBlur(true);
+  }
+  function selectSubject() {
+    navigate("/detection/" + id);
   }
   console.log({ id });
   console.log(uri);
@@ -36,15 +40,10 @@ function Modal({
               <img src="https://picsum.photos/300/300/?random" alt="subject" />
             </div>
             <div className="subjectSelect">
-              <button>추적대상 맞음</button>
+              <button onClick={selectSubject}>추적대상 맞음</button>
               <button onClick={selectAgain}>다시 선택</button>
             </div>
           </main>
-          {/* <footer>
-            <button className="close" onClick={close}>
-              close
-            </button>
-          </footer> */}
         </section>
       ) : null}
     </div>
