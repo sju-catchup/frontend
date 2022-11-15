@@ -5,6 +5,8 @@ import "index.scss";
 import Home from "pages/home/Home.js";
 import HumanAction from "pages/HumanAction/HumanAction";
 import Detection from "pages/Detection/Detection";
+import Bound from "pages/Detection/Bound";
+import Spinner2 from "pages/Detection/Spinner2";
 import LocalAlarm from "pages/HumanAction/Local";
 import CCTV from "pages/Map/CCTV";
 import CCTV3 from "pages/Map/Numbering";
@@ -17,6 +19,8 @@ root.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/human-action" element={<HumanAction />} />
+      <Route path="/Bound" element={<Bound />} />
+      <Route path="/spinner2" element={<Spinner2 />} />
       <Route path="/detection/:id" element={<Detection />} />
       <Route path="/map/cctv" element={<CCTV />} />
       <Route path="/map/cctv3" element={<CCTV3 />} />

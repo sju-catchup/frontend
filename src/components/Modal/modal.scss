@@ -47,9 +47,22 @@
   // overflow-y: scroll;
   text-align: center;
   .subjectList {
+    margin-top: 10px;
     text-align: start;
-    // overflow-y: scroll;
-    // max-height: 200px;
+    overflow-y: scroll;
+    max-height: 250px;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #2f3542;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: grey;
+      border-radius: 10px;
+      box-shadow: inset 0px 0px 5px white;
+    }
     button {
       width: 100px;
       height: 100px;
@@ -68,9 +81,10 @@
   //두 번째 모달
   .subject {
     img {
-      width: 300px;
-      height: 300px;
+      width: 400px;
+      height: 400px;
       object-fit: cover;
+      margin: 20px 0;
     }
   }
 
@@ -78,7 +92,7 @@
     display: flex;
     justify-content: center;
     button {
-      width: 140px;
+      width: 190px;
       height: 60px;
       background: none;
       border: 1.5px solid white;
@@ -104,6 +118,9 @@
   align-items: center;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-bg-show 0.3s;
+}
+.detection > section {
+  padding-bottom: 50px;
 }
 @keyframes modal-show {
   from {

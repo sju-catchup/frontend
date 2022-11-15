@@ -54,14 +54,34 @@ code {
   }
 }
 #cctv_marker_number {
+  // margin-top: 20px;
   background-color: black;
   color: black;
+
+  &:hover {
+    transform: scale(1.2) rotate(405deg);
+    font-size: 24px;
+    box-shadow: 1px 1px 1px gray;
+    > div {
+      // font-size: 24px;
+      // background-color: black;
+    }
+  }
 }
 #cctv_marker_number_red {
   background-color: red;
   color: red;
+  &:hover {
+    background-color: rgb(161, 113, 113);
+    color: rgb(161, 113, 113);
+  }
 }
-
+#mapp > div {
+  height: 700px;
+  .button {
+    z-index: 10000;
+  }
+}
 // .tabulator-row .tabulator-cell[tabulator-field="id"],
 // tabulator-col-title:first-child {
 //   width: 10% !important;

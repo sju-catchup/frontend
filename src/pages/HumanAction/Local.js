@@ -9,7 +9,7 @@ import styles from "./humanAction.module.scss";
 // import HttpsService from "lib/api/HttpsService";
 import { columns, initialSort } from "assets/TableColumn.js";
 import "react-tabulator/lib/styles.css"; // required styles
-import "react-tabulator/lib/css/tabulator_simple.min.css"; // theme
+import "react-tabulator/lib/css/tabulator_bulma.min.css"; // theme
 import { ReactTabulator } from "react-tabulator";
 import { io } from "socket.io-client";
 import response from "assets/data.json";
@@ -35,9 +35,10 @@ const Record = () => {
   });
   useEffect(() => {
     const Map = new naver.maps.Map(container.current, {
-      center: new naver.maps.LatLng(37.5505118, 127.0666035),
+      center: new naver.maps.LatLng(37.54945, 127.07391),
+      //37.5505118, 127.0666035
       level: 3,
-      zoom: 12,
+      zoom: 16,
       minZoom: 7, //지도의 최소 줌 레벨
       zoomControl: true, //줌 컨트롤의 표시 여부
       zoomControlOptions: {

@@ -56,52 +56,37 @@ function Modal({ open, close, setPrevModalOpen, header, id, uri, setBlur }) {
               ></iframe>
               <div className="subjectList">
                 <button onClick={onClickSubject}>
-                  <img
-                    src="https://picsum.photos/300/300/?random"
-                    alt="subject"
-                  />
+                  <img src="https://i.pravatar.cc/201" alt="subject" />
                 </button>
-                <button>
-                  <img
-                    src="https://picsum.photos/60/60/?random"
-                    alt="subject"
-                  />
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/200" alt="subject" />
                 </button>
-                <button>
-                  <img
-                    src="https://picsum.photos/60/60/?random"
-                    alt="subject"
-                  />
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/100" alt="subject" />
                 </button>
-                <button>
-                  <img
-                    src="https://picsum.photos/60/60/?random"
-                    alt="subject"
-                  />
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/310" alt="subject" />
                 </button>
-                <button>
-                  <img
-                    src="https://picsum.photos/60/60/?random"
-                    alt="subject"
-                  />
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/340" alt="subject" />
                 </button>
-                <button>
-                  <img
-                    src="https://picsum.photos/60/60/?random"
-                    alt="subject"
-                  />
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/301" alt="subject" />
                 </button>
-                <button>
-                  <img
-                    src="https://picsum.photos/60/60/?random"
-                    alt="subject"
-                  />
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/302" alt="subject" />
                 </button>
-                <button>
-                  <img
-                    src="https://picsum.photos/60/60/?random"
-                    alt="subject"
-                  />
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/303" alt="subject" />
+                </button>
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/304" alt="subject" />
+                </button>
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/305" alt="subject" />
+                </button>
+                <button onClick={onClickSubject}>
+                  <img src="https://i.pravatar.cc/306" alt="subject" />
                 </button>
               </div>
             </main>

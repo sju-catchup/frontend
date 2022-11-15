@@ -37,10 +37,10 @@ function Modal({
           </header>
           <main>
             <div className="subject">
-              <img src="https://picsum.photos/300/300/?random" alt="subject" />
+              <img src="https://i.pravatar.cc/300" alt="subject" />
             </div>
             <div className="subjectSelect">
-              <button onClick={selectSubject}>추적대상 맞음</button>
+              <button onClick={selectSubject}>추적하기</button>
               <button onClick={selectAgain}>다시 선택</button>
             </div>
           </main>

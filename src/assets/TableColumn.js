@@ -29,12 +29,26 @@ export const columns = [
     field: "address",
     align: "center",
   },
-  {
-    title: "cctv 위치",
-    field: "address",
-    align: "center",
-  },
 ];
 export const initialSort = [
   { column: "createdAt", dir: "desc" }, //sort by this first
+];
+export const columnsforDetaction = [
+  { title: "id", field: "id" },
+  // {
+  //   title: "생성시간",
+  //   field: "createdAt",
+  //   align: "center",
+  // },
+  { title: "start time", field: "start_time" },
+
+  { title: "동영상 url", field: "url", align: "center", formatter: "link" },
+  // {
+  //   title: "cctv id",
+  //   field: "cctv_id",
+  //   align: "center",
+  // },
+];
+export const initialSortforDetaction = [
+  { column: "id", dir: "desc" }, //sort by this first
 ];
