@@ -1,17 +1,21 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import "react-tabulator/lib/styles.css"; // required styles
+// import "react-tabulator/lib/css/tabulator_bulma.min.css"; // theme
+import { ReactTabulator } from "react-tabulator";
+import { io } from "socket.io-client";
+
 import "index.scss";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
+import Modal from "components/Modal/SuspectSelectionModal";
 import styles from "./humanAction.module.scss";
-import HttpsService from "lib/api/HttpsService";
+import { getElem, setMarker, pushToList } from "lib/utils/forHumanaction";
 import { columns, initialSort } from "assets/TableColumn.js";
-import "react-tabulator/lib/styles.css"; // required styles
-import "react-tabulator/lib/css/tabulator_simple.min.css"; // theme
-import { ReactTabulator } from "react-tabulator";
-import { io } from "socket.io-client";
+import HttpsService from "lib/api/HttpsService";
 // import response from "assets/data.json";
+
 const { naver } = window;
 const Record = () => {
   const listGroup = [];
@@ -19,88 +23,68 @@ const Record = () => {
   const socketList = [];
   const [list, setList] = useState([]);
   const [loading, setloading] = useState(true);
-  var markerPosition;
   const container = useRef(null);
-
-  const socket = io("https://poor-spies-jam-106-101-129-129.loca.lt", {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [blur, setBlur] = useState(false);
+  const [detectData, setDetectData] = useState({
+    id: "",
+    url: "",
+    start: "",
+    end: "",
+  });
+  const closeModal = () => {
+    setModalOpen(false);
+    setBlur(false);
+  };
+  const socket = io("https://88f4-175-196-45-162.jp.ngrok.io", {
     transports: ["websocket"],
   });
   useEffect(() => {
-    const Map = new naver.maps.Map(container.current, {
-      center: new naver.maps.LatLng(37.5505118, 127.0666035),
+    const map = new naver.maps.Map(container.current, {
+      center: new naver.maps.LatLng(37.560518, 127.085579),
       level: 3,
-      zoom: 18,
+      zoom: 16,
       minZoom: 7, //지도의 최소 줌 레벨
       zoomControl: true, //줌 컨트롤의 표시 여부
       zoomControlOptions: {
-        //줌 컨트롤의 옵션
         position: naver.maps.Position.TOP_LEFT,
       },
     });
     //https 통신
     HttpsService.viewAllCCTV().then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       response.data.CCTV.map((obj) => {
-        markerPosition = new naver.maps.LatLng(
-          parseFloat(obj.position.x),
-          parseFloat(obj.position.y)
+        // response.CCTV.map((obj) => {
+        setMarker(
+          map,
+          obj,
+          detectData,
+          setDetectData,
+          setModalOpen,
+          setBlur,
+          "_dot",
+          ""
         );
-        new naver.maps.Marker({
-          Map,
-          title: obj.address,
-          position: markerPosition,
-          icon: {
-            content: [
-              '<div className="cs_mapbridge" id="cctv_marker_dot" >',
-              "</div>",
-            ].join(""),
-            size: new naver.maps.Size(10, 10),
-            anchor: new naver.maps.Point(19, 58),
-          },
-          draggable: true,
-        });
       });
     });
     HttpsService.viewAllRecord()
       .then((response) => {
         // console.log(response.data.HumanAction);
         response.data.HumanAction.map((obj) => {
+          // response.HumanAction.map((obj) => {
           //table 데이터
-          listGroup.push({
-            id: obj.id,
-            type: obj.type,
-            createdAt: obj.createdAt,
-            start_time: obj.start_time,
-            end_time: obj.end_time,
-            url: obj.uri,
-            cctv_id: obj.cctv.id,
-            position:
-              "( " + obj.cctv.position.x + ", " + obj.cctv.position.y + " )",
-            address: obj.cctv.address,
-          }),
+          listGroup.push(getElem(obj)),
             //map 데이터
-
-            (markerPosition = new naver.maps.LatLng(
-              parseFloat(obj.cctv.position.x),
-              parseFloat(obj.cctv.position.y)
-            ));
-          new naver.maps.Marker({
-            Map,
-            title: "Green",
-            position: markerPosition,
-            icon: {
-              content: [
-                '<div className="cs_mapbridge" id="cctv_marker_number" >',
-                "<div>",
-                obj.id,
-                "</div>",
-                "</div>",
-              ].join(""),
-              size: new naver.maps.Size(10, 10),
-              anchor: new naver.maps.Point(19, 58),
-            },
-            draggable: true,
-          });
+            setMarker(
+              map,
+              obj,
+              detectData,
+              setDetectData,
+              setModalOpen,
+              setBlur,
+              "_number",
+              ""
+            );
         });
         setList(listGroup);
       })
@@ -109,6 +93,9 @@ const Record = () => {
       });
     setloading(false);
 
+    // const socket = io("localhost:5000/", {
+    //   transports: ["websocket"],
+    // });
     //소켓통신
     socket.connect();
     // client-side
@@ -120,92 +107,51 @@ const Record = () => {
     });
     socket.on("New_HumanAction", (data) => {
       const obj = data.HumanAction;
-      const elem = {
-        id: obj.id,
-        type: obj.type,
-        createdAt: obj.createdAt,
-        start_time: obj.start_time,
-        end_time: obj.end_time,
-        url: obj.uri,
-        cctv_id: obj.cctv.id,
-        position:
-          "( " + obj.cctv.position.x + ", " + obj.cctv.position.y + " )",
-        address: obj.cctv.address,
-      };
+      const elem = getElem(obj);
       if (socketList.length === 0) {
-        socketList.push(elem);
-        socketData.push(elem),
-          //map 데이터
-          (markerPosition = new naver.maps.LatLng(
-            parseFloat(obj.cctv.position.x),
-            parseFloat(obj.cctv.position.y)
-          ));
-        new naver.maps.Marker({
-          Map,
-          title: "Green",
-          position: markerPosition,
-          icon: {
-            content: [
-              '<div className="cs_mapbridge" id="cctv_marker_number_red" >',
-              "<div>",
-              obj.id,
-              "</div>",
-              "</div>",
-            ].join(""),
-            size: new naver.maps.Size(10, 10),
-            anchor: new naver.maps.Point(19, 58),
-          },
-          draggable: true,
-        });
+        pushToList(socketData, socketList, obj, elem, setList);
+        setMarker(
+          map,
+          obj,
+          detectData,
+          setDetectData,
+          setModalOpen,
+          setBlur,
+          "_number",
+          "_red"
+        );
         socketData.map((obj) => {
           setList((prev) => [...prev, obj]);
         });
       }
       socketList.map((existingObj) => {
-        console.log(existingObj);
         if (existingObj.id !== obj.id) {
           //table 데이터
-          console.log(obj);
           socketData.pop();
-          socketList.push(elem);
-          socketData.push(elem),
-            //map 데이터
-            (markerPosition = new naver.maps.LatLng(
-              parseFloat(obj.cctv.position.x),
-              parseFloat(obj.cctv.position.y)
-            ));
-          new naver.maps.Marker({
-            Map,
-            title: "Green",
-            position: markerPosition,
-            icon: {
-              content: [
-                '<div className="cs_mapbridge" id="cctv_marker_number_red" >',
-                "<div>",
-                obj.id,
-                "</div>",
-                "</div>",
-              ].join(""),
-              size: new naver.maps.Size(10, 10),
-              anchor: new naver.maps.Point(19, 58),
-            },
-            draggable: true,
-          });
-          // console.log(socketData);
+          pushToList(socketData, socketList, obj, elem, setList);
+          setMarker(
+            map,
+            obj,
+            detectData,
+            setDetectData,
+            setModalOpen,
+            setBlur,
+            "_number",
+            "_red"
+          );
           socketData.map((obj) => {
             setList((prev) => [...prev, obj]);
           });
         }
       });
     });
-    console.log({ listGroup }, { list });
     setloading(false);
   }, []);
   return (
     <div id="record">
       <Header />
       <main className="contents">
-        <section>
+        <section className={blur ? styles.blur : ""}>
           <header>
             <h1>이상행동 기록 조회</h1>
           </header>
@@ -222,6 +168,17 @@ const Record = () => {
             )}
           </div>
         </section>
+        <Modal
+          open={modalOpen}
+          close={closeModal}
+          setPrevModalOpen={setModalOpen}
+          id={detectData.id}
+          uri={detectData.url}
+          start={detectData.start}
+          end={detectData.end}
+          header="추적대상 선정"
+          setBlur={setBlur}
+        ></Modal>
       </main>
       <Footer />
     </div>

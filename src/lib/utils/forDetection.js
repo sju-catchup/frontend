@@ -1,6 +1,6 @@
 import warn from "assets/cctv1.png";
 const { naver } = window;
-import { setDateFormat, setTimeFormat } from "lib/utils/humanaction";
+import { setDateFormat, setTimeFormat } from "lib/utils/forHumanaction";
 
 export function setTable(obj, i) {
   console.log({ obj });

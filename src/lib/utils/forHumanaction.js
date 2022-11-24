@@ -34,31 +34,43 @@ export function setMarker(
   color
 ) {
   var markerPosition;
+  var excontent;
   if (type === "_dot") {
     markerPosition = new naver.maps.LatLng(
       parseFloat(obj.position.y),
       parseFloat(obj.position.x)
     );
-  } else
+    excontent = [
+      '<div className="cs_mapbridge" id="cctv_marker',
+      type,
+      color,
+      '" >',
+      "<div>",
+      "</div>",
+      "</div>",
+    ].join("");
+  } else {
     markerPosition = new naver.maps.LatLng(
       parseFloat(obj.cctv.position.y),
       parseFloat(obj.cctv.position.x)
     );
+    excontent = [
+      '<div className="cs_mapbridge" id="cctv_marker',
+      type,
+      color,
+      '" >',
+      "<div>",
+      obj.id,
+      "</div>",
+      "</div>",
+    ].join("");
+  }
   const marker = new naver.maps.Marker({
     map,
     title: "Green",
     position: markerPosition,
     icon: {
-      content: [
-        '<div className="cs_mapbridge" id="cctv_marker',
-        type,
-        color,
-        '" >',
-        "<div>",
-        obj.id,
-        "</div>",
-        "</div>",
-      ].join(""),
+      content: excontent,
       size: new naver.maps.Size(10, 10),
       anchor: new naver.maps.Point(19, 58),
     },

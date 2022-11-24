@@ -1,6 +1,7 @@
 .tabulator {
   display: inline-block;
   width: 50%;
+  margin: 0 !important;
 }
 .map {
   height: 700px;
@@ -85,5 +86,16 @@
   100% {
     top: 30%;
     left: 10%;
+  }
+}
+.suspectImg {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  > img {
+    width: 160px;
+    height: 250px;
+    object-fit: cover;
+    object-position: top;
   }
 }
