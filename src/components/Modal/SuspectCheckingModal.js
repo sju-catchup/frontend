@@ -23,7 +23,6 @@ function Modal({
   // function selectSubject() {
   //   navigate("/detection/" + id + "/" + suspectId, { state: partialUser });
   // }
-  console.log({ url });
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={openModal ? "openModal modal" : "modal"}>

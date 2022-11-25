@@ -29,6 +29,7 @@ const { naver } = window;
 const listGroup = [];
 const Detection = () => {
   const container = useRef(null);
+  const detectionOrder = useRef(1);
   const { idParams, suspectId, suspectImgUrl } = useParams();
   console.log({ idParams, suspectId, suspectImgUrl });
   const [isLoading, setIsLoading] = useState(false);
@@ -38,18 +39,18 @@ const Detection = () => {
   const [uri, setUri] = useState();
   const [list, setList] = useState([]);
   const lastest = [];
-  var map,
-    detectionOrder = 1;
+  var table;
+  var map;
   var isDuplicate = false;
-  const a = useLocation();
-  console.log(a);
-  const imgurl = a.state.suspectImgUrl;
-  console.log(imgurl);
+  const imgurl = useLocation().state.suspectImgUrl;
   const closeModal = () => {
     setModalOpen(false);
     setBlur(false);
   };
 
+  const socket = io("https://clever-files-sit-106-101-130-239.loca.lt", {
+    transports: ["websocket"],
+  });
   useEffect(() => {
     map = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(37.560518, 127.085579),
@@ -62,33 +63,32 @@ const Detection = () => {
       },
     });
     // if (listGroup.length === 0) {
-    listGroup.push(setTable(response.findHumanAction, detectionOrder));
+    // listGroup.push(setTable(response.findHumanAction, detectionOrder));
     lastest.push(setPath(response.findHumanAction));
     setMarker(
       map,
       response.findHumanAction,
       response.findHumanAction.id,
       response.findHumanAction.uri,
-      detectionOrder++
+      detectionOrder.current++
     );
     setIsLoading(false);
     setList(listGroup);
     // }
-
+    // const socket = io("localhost:5000", {
+    //   transports: ["websocket"],
+    // });
     //실시간 경로
-    const socket = io("localhost:5000/", {
-      transports: ["websocket"],
-    });
     socket.connect();
     socket.on("connect", () => {
       console.log("socket connected" + socket.id);
     });
     socket.on("Tracking_Result", (data) => {
-      console.log(data.Tracking);
+      // console.log(data.Tracking);
       var marker;
       const obj = data.Tracking;
-      console.log(obj);
-
+      // console.log(obj);
+      const order = detectionOrder.current;
       // listGroup.push(setTable(obj));
       listGroup.map((exobj) => {
         if (exobj.id === obj.id) isDuplicate = true;
@@ -96,14 +96,15 @@ const Detection = () => {
       if (isDuplicate) console.log("중복");
       else console.log("중복x");
       if (!isDuplicate) {
-        listGroup.push(setTable(obj, detectionOrder));
-        setList((prev) => [...prev, setTable(obj), detectionOrder]);
+        table = setTable(obj, order);
+        listGroup.push(table);
+        setList((prev) => [...prev, table]);
         marker = setMarker(
           map,
           obj,
           data.Tracking.id,
           data.Tracking.url,
-          detectionOrder++
+          order
         );
         marker.addListener("click", function (e) {
           //obj.id로 api 요청
@@ -114,6 +115,7 @@ const Detection = () => {
         });
         setPolyline(map, lastest.pop(), setPath(obj));
         lastest.push(setPath(obj));
+        detectionOrder.current++;
       }
     });
     //http
@@ -135,7 +137,6 @@ const Detection = () => {
       strokeOpacity: 0.8,
     });
   }, []);
-
   console.log({ list });
   return (
     <div id="record">

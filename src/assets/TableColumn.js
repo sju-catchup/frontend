@@ -68,5 +68,5 @@ export const columnsforDetaction = [
   { title: "동영상 url", field: "url", align: "center", formatter: "link" },
 ];
 export const initialSortforDetaction = [
-  { column: "order", dir: "asc" }, //sort by this first
+  { column: "start_time", dir: "asc" }, //sort by this first
 ];

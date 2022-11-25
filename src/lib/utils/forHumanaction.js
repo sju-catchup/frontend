@@ -75,17 +75,16 @@ export function setMarker(
       anchor: new naver.maps.Point(19, 58),
     },
     draggable: true,
-    idValue: obj.id,
+    idValue: obj.cctv_id,
     urlValue: obj.url,
     startValue: obj.start_time,
     endValue: obj.end_time,
   });
   marker.addListener("click", function (e) {
     //obj.id로 api 요청
-    console.log(e.overlay.urlValue);
     setDetectData({
       ...detectData,
-      id: e.overlay.idValue,
+      cctv_id: e.overlay.idValue,
       url: e.overlay.urlValue,
       start: e.overlay.startValue,
       end: e.overlay.endValue,

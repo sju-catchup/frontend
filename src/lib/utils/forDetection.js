@@ -3,7 +3,7 @@ const { naver } = window;
 import { setDateFormat, setTimeFormat } from "lib/utils/forHumanaction";
 
 export function setTable(obj, i) {
-  console.log({ obj });
+  console.log({ obj, i });
   return {
     order: i,
     id: obj.id,
@@ -14,8 +14,6 @@ export function setTable(obj, i) {
     lat: obj.cctv.y,
     lng: obj.cctv.x,
     address: obj.cctv.address,
-    markerX: obj.cctv.x,
-    markerY: obj.cctv.y,
   };
 }
 export function setPath(obj) {

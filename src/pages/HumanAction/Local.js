@@ -27,7 +27,7 @@ const Record = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [blur, setBlur] = useState(false);
   const [detectData, setDetectData] = useState({
-    id: "",
+    cctv_id: "",
     url: "",
     start: "",
     end: "",
@@ -90,7 +90,7 @@ const Record = () => {
     // });
     setloading(false);
 
-    const socket = io("localhost:5000/", {
+    const socket = io("https://fae2-175-196-45-162.jp.ngrok.io", {
       transports: ["websocket"],
     });
     //소켓통신
@@ -169,7 +169,7 @@ const Record = () => {
           open={modalOpen}
           close={closeModal}
           setPrevModalOpen={setModalOpen}
-          id={detectData.id}
+          id={detectData.cctv_id}
           uri={detectData.url}
           start={detectData.start}
           end={detectData.end}

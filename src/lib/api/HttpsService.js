@@ -1,17 +1,17 @@
 import axios from "axios";
-const BASE_URL = "https://79c4-175-196-45-162.ngrok.io";
+const BASE_URL = "https://19dc-106-101-130-239.jp.ngrok.io";
 class HttpsService {
   viewAllCCTV() {
     return axios.get(BASE_URL + "/cctv", {
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "ngrok-skip-browser-warning": "*",
       },
     });
   }
   viewAllRecord() {
     return axios.get(BASE_URL + "/human-action", {
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "ngrok-skip-browser-warning": "*",
       },
     });
   }

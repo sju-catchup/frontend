@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./modal.scss";
 import NewModal from "./SuspectCheckingModal.js";
-import response from "assets/data.json";
-// import HttpsService from "lib/api/HttpsService";
+// import response from "assets/data.json";
+import HttpsService from "lib/api/HttpsService";
 // eslint-disable-next-line react/prop-types
 function SuspectList({ suspectList, onClickSubject }) {
   const list = [];
-  console.log(suspectList);
   // eslint-disable-next-line react/prop-types
   suspectList.map((obj, i) => {
     list.push(
@@ -31,6 +30,7 @@ function Modal({
 }) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const modalBody = useRef();
+  const [isLoading, setIsLoading] = useState(true);
   const [suspectList, setSuspectList] = useState([]);
   const [suspectId, setSuspectId] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,16 +46,21 @@ function Modal({
     setModalOpen(false);
     setBlur(false);
   };
-  useEffect(() => {
-    setSuspectList(response.Suspect);
-    console.log(start, end);
-  }, []);
-  // if (open) {
-  //   HttpsService.findAllSuspect(id, start, end).then((response) => {
-  //     console.log(response);
-  //     setSuspectList(response.Suspect);
-  //   });
-  // }
+  // useEffect(() => {
+  //   setSuspectList(response.Suspect);
+  //   console.log(start, end);
+  // setIsLoading(false)
+  // }, []);
+  if (open) {
+    HttpsService.findAllSuspect(id, start, end)
+      .then((response) => {
+        setSuspectList(response.data.Suspect);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <>
@@ -77,10 +82,14 @@ function Modal({
                 allowFullScreen
               ></iframe>
               <div className="subjectList">
-                <SuspectList
-                  suspectList={suspectList}
-                  onClickSubject={onClickSubject}
-                />
+                {isLoading ? (
+                  ""
+                ) : (
+                  <SuspectList
+                    suspectList={suspectList}
+                    onClickSubject={onClickSubject}
+                  />
+                )}
               </div>
             </main>
           </section>

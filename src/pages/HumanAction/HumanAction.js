@@ -27,7 +27,7 @@ const Record = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [blur, setBlur] = useState(false);
   const [detectData, setDetectData] = useState({
-    id: "",
+    cctv_id: "",
     url: "",
     start: "",
     end: "",
@@ -36,7 +36,7 @@ const Record = () => {
     setModalOpen(false);
     setBlur(false);
   };
-  const socket = io("https://88f4-175-196-45-162.jp.ngrok.io", {
+  const socket = io("https://clever-files-sit-106-101-130-239.loca.lt", {
     transports: ["websocket"],
   });
   useEffect(() => {
@@ -69,7 +69,7 @@ const Record = () => {
     });
     HttpsService.viewAllRecord()
       .then((response) => {
-        // console.log(response.data.HumanAction);
+        console.log(response.data.HumanAction);
         response.data.HumanAction.map((obj) => {
           // response.HumanAction.map((obj) => {
           //table 데이터
@@ -92,8 +92,9 @@ const Record = () => {
         console.log(error);
       });
     setloading(false);
+    console.log(detectData.cctv_id);
 
-    // const socket = io("localhost:5000/", {
+    // const socket = io("https://mighty-otters-travel-175-196-45-162.loca.lt", {
     //   transports: ["websocket"],
     // });
     //소켓통신
@@ -172,7 +173,7 @@ const Record = () => {
           open={modalOpen}
           close={closeModal}
           setPrevModalOpen={setModalOpen}
-          id={detectData.id}
+          id={detectData.cctv_id}
           uri={detectData.url}
           start={detectData.start}
           end={detectData.end}
