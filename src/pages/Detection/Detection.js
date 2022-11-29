@@ -1,131 +1,95 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import "react-tabulator/lib/styles.css"; // required styles
 import "react-tabulator/lib/css/tabulator_bulma.min.css"; // theme
 import { ReactTabulator } from "react-tabulator";
 import { io } from "socket.io-client";
 import { useLocation } from "react-router-dom";
-
 import "index.scss";
 import styles from "pages/HumanAction/humanAction.module.scss";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import Modal from "components/Modal/DetectionCCTVplayer";
-import dodbogi from "assets/dodbogi.png";
 import {
   columnsforDetaction,
   initialSortforDetaction,
 } from "assets/TableColumn.js";
-import {
-  setTable,
-  setPath,
-  setMarker,
-  setPolyline,
-} from "lib/utils/forDetection";
+// import { getElem, makeMarker, pushToList } from "lib/utils/forHumanaction";
+import { setTable, makeMarker } from "lib/utils/forDetection";
 // import HttpsService from "lib/api/HttpsService";
-import response from "assets/data.json";
 
 const { naver } = window;
-const listGroup = [];
 const Detection = () => {
   const container = useRef(null);
-  const detectionOrder = useRef(1);
-  const { idParams, suspectId, suspectImgUrl } = useParams();
-  console.log({ idParams, suspectId, suspectImgUrl });
-  const [isLoading, setIsLoading] = useState(false);
+  const [prevSortPosition, setPrevSortPosition] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [blur, setBlur] = useState(false);
   const [id, setId] = useState();
   const [uri, setUri] = useState();
+  const [socketData, setSocketData] = useState("");
   const [list, setList] = useState([]);
-  const lastest = [];
-  var table;
+  const [trackingPath, setTrackingPath] = useState([]);
   var map;
-  var isDuplicate = false;
   const imgurl = useLocation().state.suspectImgUrl;
+  const suspectData = useLocation().state.suspectData;
   const closeModal = () => {
     setModalOpen(false);
     setBlur(false);
   };
 
-  const socket = io("https://clever-files-sit-106-101-130-239.loca.lt", {
-    transports: ["websocket"],
-  });
+  // const socket = io("https://clever-files-sit-106-101-130-239.loca.lt", {
+  //   transports: ["websocket"],
+  // });
   useEffect(() => {
     map = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(37.560518, 127.085579),
       zoom: 16,
-      minZoom: 7, //지도의 최소 줌 레벨
-      zoomControl: true, //줌 컨트롤의 표시 여부
+      minZoom: 7,
+      zoomControl: true,
       zoomControlOptions: {
-        //줌 컨트롤의 옵션
         position: naver.maps.Position.TOP_LEFT,
       },
     });
-    // if (listGroup.length === 0) {
-    // listGroup.push(setTable(response.findHumanAction, detectionOrder));
-    lastest.push(setPath(response.findHumanAction));
-    setMarker(
-      map,
-      response.findHumanAction,
-      response.findHumanAction.id,
-      response.findHumanAction.uri,
-      detectionOrder.current++
-    );
-    setIsLoading(false);
-    setList(listGroup);
-    // }
-    // const socket = io("localhost:5000", {
-    //   transports: ["websocket"],
-    // });
-    //실시간 경로
+    //이상행동 발생위치 추가
+    // setPrevSortPosition([
+    //   {
+    //     id: suspectData.id,
+    //     url: suspectData.url,
+    //     cctv_id: suspectData.cctv_id,
+    //     lat: suspectData.lat,
+    //     lng: suspectData.lng,
+    //     address: suspectData.address,
+    //     order: 0,
+    //     start_time: "0",
+    //     position: new naver.maps.LatLng(suspectData.lat, suspectData.lng),
+    //   },
+    // ]);
+
+    const socket = io("localhost:5000", {
+      transports: ["websocket"],
+    });
     socket.connect();
     socket.on("connect", () => {
       console.log("socket connected" + socket.id);
     });
     socket.on("Tracking_Result", (data) => {
-      // console.log(data.Tracking);
-      var marker;
       const obj = data.Tracking;
-      // console.log(obj);
-      const order = detectionOrder.current;
-      // listGroup.push(setTable(obj));
-      listGroup.map((exobj) => {
-        if (exobj.id === obj.id) isDuplicate = true;
-      });
-      if (isDuplicate) console.log("중복");
-      else console.log("중복x");
-      if (!isDuplicate) {
-        table = setTable(obj, order);
-        listGroup.push(table);
-        setList((prev) => [...prev, table]);
-        marker = setMarker(
-          map,
-          obj,
-          data.Tracking.id,
-          data.Tracking.url,
-          order
-        );
-        marker.addListener("click", function (e) {
-          //obj.id로 api 요청
-          setId(e.overlay.idValue);
-          setUri(e.overlay.uriValue);
-          setModalOpen(true);
-          setBlur(true);
-        });
-        setPolyline(map, lastest.pop(), setPath(obj));
-        lastest.push(setPath(obj));
-        detectionOrder.current++;
-      }
+      setSocketData(setTable(obj));
+      setPrevSortPosition((prev) => [...prev, setTable(obj)]);
     });
-    //http
-    // const [start,setStart]=useState();
-    // HttpsService.findHumanAction().then((response)=>{
-    //   setStart(response.data);
-    // })
+  }, []);
+  useEffect(() => {
+    map = new naver.maps.Map("map", {
+      center: new naver.maps.LatLng(37.560518, 127.085579),
+      zoom: 16,
+      minZoom: 7,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: naver.maps.Position.TOP_LEFT,
+      },
+    });
     new naver.maps.Polyline({
       map: map,
-      path: [setPath(response.findHumanAction)],
+      path: trackingPath,
       endIconSize: 20,
       startIcon: naver.maps.PointingIcon.CIRCLE,
       strokeLineCap: "round",
@@ -134,9 +98,39 @@ const Detection = () => {
       startIconSize: 15,
       strokeWeight: 8,
       strokeColor: "#2840a5",
-      strokeOpacity: 0.8,
+      // strokeColor: "#ff8700",
+      strokeOpacity: 0.9,
     });
-  }, []);
+    makeMarker(map, list, 0, setId, setUri, setModalOpen, setBlur);
+  }, [trackingPath]);
+  useEffect(() => {
+    //테이블과 마커에서 사용할 'list' 가공
+    const idx = list.findIndex((i) => i.id == socketData.id);
+    if (idx === -1) {
+      console.log({ postSort });
+      setTrackingPath([
+        new naver.maps.LatLng(suspectData.lat, suspectData.lng),
+      ]); //tpath 초기화
+      var postSort = prevSortPosition.sort(function (a, b) {
+        //시간 순 정렬
+        let x = parseInt(a.time);
+        let y = parseInt(b.time);
+        if (x < y) return -1;
+        else if (x > y) return 1;
+        return 0;
+      });
+      for (let i = 0; i < postSort.length; i++) {
+        setTrackingPath((prev) => [...prev, postSort[i].position]);
+        postSort[i].order = i + 1;
+      }
+      setList(postSort); //정렬된 값을 list에 넣음
+      console.log(postSort);
+    }
+  }, [socketData]);
+  useEffect(() => {
+    makeMarker(map, list, setId, setUri, setModalOpen, setBlur); //마커 만들기
+  }, [list]); //중복 아닌 데이터 왔을 때만 실행
+  useEffect(() => {}, [prevSortPosition]);
   console.log({ list });
   return (
     <div id="record">
@@ -146,24 +140,15 @@ const Detection = () => {
           <header>
             <h1>객체추적</h1>
           </header>
-          {/* <Spinner /> */}
           <div className={styles.container}>
             <div id={"map"} ref={container} className={styles.map}></div>
-            {isLoading ? (
-              <div className={styles.spinner}>
-                <img src={dodbogi} alt="돋보기" className={styles.dodbogi} />
-                <h2>추적대상을 찾고 있습니다. 잠시만 기다려주세요.</h2>
-              </div>
-            ) : (
-              <ReactTabulator
-                columns={columnsforDetaction}
-                data={list}
-                initialSort={initialSortforDetaction}
-              />
-            )}
+            <ReactTabulator
+              columns={columnsforDetaction}
+              data={list}
+              initialSort={initialSortforDetaction}
+            />
           </div>
         </section>
-
         <Modal
           open={modalOpen}
           close={closeModal}
@@ -172,7 +157,7 @@ const Detection = () => {
           uri={uri}
         ></Modal>
         <div className={styles.suspectImg}>
-          <img src={imgurl} alt={suspectId} />
+          <img src={imgurl} alt="suspect" />
         </div>
       </main>
       <Footer />
