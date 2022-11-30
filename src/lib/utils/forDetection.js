@@ -1,4 +1,3 @@
-import warn from "assets/cctv1.png";
 const { naver } = window;
 import { setDateFormat, setTimeFormat } from "lib/utils/forHumanaction";
 
@@ -35,7 +34,6 @@ export function setMarker(map, obj, id, url, i, position) {
         "<div>",
         i,
         "</div>",
-        "<img src='" + warn + "'/>",
         "</div>",
       ].join(""),
       size: new naver.maps.Size(50, 50),
