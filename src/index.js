@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "index.scss";
 // import Home from "pages/home/Home.js";
 import HumanAction from "pages/HumanAction/HumanAction";
+import New from "pages/HumanAction/New";
 import Detection from "pages/Detection/Detection";
 import Bound from "pages/Detection/Bound";
 import LocalAlarm from "pages/HumanAction/Local";
@@ -15,6 +16,7 @@ root.render(
     <Routes>
       {/* <Route path="/" element={<Home />} /> */}
       <Route path="/" element={<HumanAction />} />
+      <Route path="/a" element={<New />} />
       <Route path="/Bound" element={<Bound />} />
       <Route path="/detection/:id/:suspectId" element={<Detection />} />
       <Route path="/local" element={<LocalAlarm />} />

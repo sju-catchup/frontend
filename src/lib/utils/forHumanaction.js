@@ -9,7 +9,7 @@ export function setTimeFormat(time) {
 }
 export function getElem(obj, method) {
   const elem = {
-    id: obj.id,
+    id: parseInt(obj.id),
     type: obj.type,
     createdAt: obj.createdAt,
     date: moment(obj.start_time).format("YY.MM.DD"),
@@ -21,6 +21,8 @@ export function getElem(obj, method) {
     lng: obj.cctv.position.x,
     address: obj.cctv.address,
     method: method,
+    start: obj.start_time,
+    end: obj.end_time,
   };
   return elem;
 }
@@ -82,6 +84,7 @@ export function setMarker(
     endValue: obj.end_time,
   });
   marker.addListener("click", function (e) {
+    console.log(e.overlay.idValue);
     //obj.id로 api 요청
     setDetectData({
       ...detectData,
@@ -143,8 +146,8 @@ export function makeMarker(
       draggable: true,
       idValue: obj.cctv_id,
       urlValue: obj.url,
-      startValue: obj.start_time,
-      endValue: obj.end_time,
+      startValue: obj.start,
+      endValue: obj.end,
       lngValue: obj.lng,
       latValue: obj.lat,
     });

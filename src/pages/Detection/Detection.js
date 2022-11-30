@@ -36,7 +36,7 @@ const Detection = () => {
     setBlur(false);
   };
 
-  // const socket = io("https://clever-files-sit-106-101-130-239.loca.lt", {
+  // const socket = io("http://15.164.233.153:3000", {
   //   transports: ["websocket"],
   // });
   useEffect(() => {
@@ -101,13 +101,14 @@ const Detection = () => {
       // strokeColor: "#ff8700",
       strokeOpacity: 0.9,
     });
-    makeMarker(map, list, 0, setId, setUri, setModalOpen, setBlur);
+    // makeMarker(map, list, 0, setId, setUri, setModalOpen, setBlur);
   }, [trackingPath]);
   useEffect(() => {
     //테이블과 마커에서 사용할 'list' 가공
-    const idx = list.findIndex((i) => i.id == socketData.id);
+    console.log({ list });
+    const idx = list.findIndex((i) => i.id === socketData.id);
     if (idx === -1) {
-      console.log({ postSort });
+      console.log({ socketData });
       setTrackingPath([
         new naver.maps.LatLng(suspectData.lat, suspectData.lng),
       ]); //tpath 초기화
@@ -123,14 +124,17 @@ const Detection = () => {
         setTrackingPath((prev) => [...prev, postSort[i].position]);
         postSort[i].order = i + 1;
       }
+      console.log({ postSort });
       setList(postSort); //정렬된 값을 list에 넣음
-      console.log(postSort);
+    } else {
+      console.log("중복");
+      console.log("same" + socketData.id);
     }
   }, [socketData]);
   useEffect(() => {
+    console.log({ list });
     makeMarker(map, list, setId, setUri, setModalOpen, setBlur); //마커 만들기
   }, [list]); //중복 아닌 데이터 왔을 때만 실행
-  useEffect(() => {}, [prevSortPosition]);
   console.log({ list });
   return (
     <div id="record">

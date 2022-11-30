@@ -9,7 +9,7 @@ function Modal({
   setPrevModalOpen,
   setBlur,
   header,
-  id,
+  suspectData,
   suspectId,
   url,
 }) {
@@ -41,8 +41,8 @@ function Modal({
             <div className="subjectSelect">
               {/* <button onClick={selectSubject}>추적하기</button> */}
               <Link
-                to={"/detection/" + id + "/" + suspectId}
-                state={{ suspectImgUrl: url }}
+                to={"/detection/" + suspectData.id + "/" + suspectId}
+                state={{ suspectImgUrl: url, suspectData: suspectData }}
               >
                 추적하기
               </Link>

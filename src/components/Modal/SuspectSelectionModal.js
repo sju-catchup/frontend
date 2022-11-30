@@ -22,12 +22,10 @@ function Modal({
   close,
   setPrevModalOpen,
   header,
-  id,
-  uri,
-  start,
-  end,
+  suspectData,
   setBlur,
 }) {
+  // console.log(suspectData);
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const modalBody = useRef();
   const [isLoading, setIsLoading] = useState(true);
@@ -48,11 +46,17 @@ function Modal({
   };
   // useEffect(() => {
   //   setSuspectList(response.Suspect);
-  //   console.log(start, end);
-  // setIsLoading(false)
+  //   console.log(suspectData.start, suspectData.end);
+  //   setIsLoading(false);
   // }, []);
+
+  //api
   if (open) {
-    HttpsService.findAllSuspect(id, start, end)
+    HttpsService.findAllSuspect(
+      suspectData.cctv_id,
+      suspectData.start,
+      suspectData.end
+    )
       .then((response) => {
         setSuspectList(response.data.Suspect);
         setIsLoading(false);
@@ -77,7 +81,7 @@ function Modal({
               <iframe
                 width="500"
                 height="350"
-                src={uri}
+                src={suspectData.url}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
@@ -99,7 +103,7 @@ function Modal({
         openModal={modalOpen}
         closeModal={closeModal}
         setPrevModalOpen={setPrevModalOpen}
-        id={id}
+        suspectData={suspectData}
         suspectId={suspectId}
         url={url}
         header="추적대상 선정"
