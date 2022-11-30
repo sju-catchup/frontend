@@ -1,6 +1,7 @@
 .tabulator {
   display: inline-block;
   width: 50%;
+  margin: 0 !important;
 }
 .map {
   height: 700px;
@@ -25,4 +26,76 @@
   text-align: center;
   line-height: 20px;
   color: white;
+}
+.blur {
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+}
+// .mapp {
+//   height: 700px;
+//   width: 90%;
+// }
+// .spinner {
+//   display: inline-block;
+//   position: absolute;
+// }
+// .loading {
+//   .map {
+//     width: 50% !important;
+//     margin: 0 25%;
+//   }
+//   .container {
+//     margin: 0 auto;
+//     text-align: center;
+//     width: 100%;
+//   }
+// }
+.dodbogi {
+  width: 150px;
+  z-index: 1000;
+  position: absolute;
+  top: 30px;
+  animation: loading 4s 1s infinite;
+}
+.spinner h2 {
+  height: 690px;
+  line-height: 700px;
+  text-align: center;
+}
+@keyframes loading {
+  0% {
+    top: 30%;
+    left: 10%;
+  }
+  20% {
+    top: 45%;
+    left: 30%;
+  }
+  40% {
+    top: 70%;
+    left: 30%;
+  }
+  60% {
+    top: 70%;
+    left: 10%;
+  }
+  80% {
+    top: 50%;
+    left: 15%;
+  }
+  100% {
+    top: 30%;
+    left: 10%;
+  }
+}
+.suspectImg {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  > img {
+    width: 160px;
+    height: 250px;
+    object-fit: cover;
+    object-position: top;
+  }
 }

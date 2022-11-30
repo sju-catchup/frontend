@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./humanAction.module.scss";
 import "index.scss";
 import "react-tabulator/lib/styles.css"; // required styles
-import "react-tabulator/lib/css/tabulator.min.css"; // theme
+import "react-tabulator/lib/css/tabulator_bulma.min.css"; // theme
 import { ReactTabulator } from "react-tabulator";
 const columns = [
   { title: "id", field: "id" },

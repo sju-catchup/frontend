@@ -1,40 +1,72 @@
 export const columns = [
-  { title: "id", field: "id" },
+  { title: "id", field: "id", width: 10 },
 
   { title: "type", field: "type", align: "left" },
   // formatter: "tickCross",
-  {
-    title: "생성시간",
-    field: "createdAt",
-    align: "center",
-    width: 10,
-  },
-  { title: "start time", field: "start_time" },
+  // {
+  //   title: "생성시간",
+  //   field: "createdAt",
+  //   align: "center",
+  //   width: 10,
+  // },
+  { title: "날짜", field: "date" },
+  { title: "발생시각", field: "start_time" },
 
-  { title: "end time", field: "end_time", align: "center" },
-  { title: "동영상 url", field: "url", align: "center", formatter: "link" },
+  { title: "종료시각", field: "end_time", align: "center" },
   {
     title: "cctv id",
     field: "cctv_id",
     align: "center",
+    width: 10,
   },
 
   {
-    title: "cctv 좌표",
-    field: "position",
+    title: "위도",
+    field: "lat",
     align: "center",
   },
   {
-    title: "cctv 위치",
-    field: "address",
+    title: "경도",
+    field: "lng",
     align: "center",
   },
   {
-    title: "cctv 위치",
+    title: "위치주소",
     field: "address",
     align: "center",
   },
+  { title: "동영상 url", field: "url", align: "center", formatter: "link" },
 ];
 export const initialSort = [
-  { column: "createdAt", dir: "desc" }, //sort by this first
+  { column: "id", dir: "desc" }, //sort by this first
+];
+export const columnsforDetaction = [
+  { title: "번호", field: "order", width: 20 },
+  {
+    title: "cctv id",
+    field: "cctv_id",
+    align: "center",
+    width: 10,
+  },
+  { title: "포착시각", field: "start_time" },
+
+  {
+    title: "위도",
+    field: "lat",
+    align: "center",
+  },
+  {
+    title: "경도",
+    field: "lng",
+    align: "center",
+  },
+  {
+    title: "위치주소",
+    field: "address",
+    align: "center",
+  },
+  { title: "동영상 url", field: "url", align: "center", formatter: "link" },
+];
+export const initialSortforDetaction = [
+  { column: "start_time", dir: "asc" }, //sort by this first
 ];

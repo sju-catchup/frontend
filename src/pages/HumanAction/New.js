@@ -13,8 +13,8 @@ import Modal from "components/Modal/SuspectSelectionModal";
 import styles from "./humanAction.module.scss";
 import { getElem, makeMarker } from "lib/utils/forHumanaction";
 import { columns, initialSort } from "assets/TableColumn.js";
-import HttpsService from "lib/api/HttpsService";
-// import response from "assets/data.json";
+// import HttpsService from "lib/api/HttpsService";
+import response from "assets/data.json";
 
 const { naver } = window;
 var map;
@@ -37,9 +37,6 @@ const Record = () => {
     setModalOpen(false);
     setBlur(false);
   };
-  const socket = io("http://15.164.233.153:3000", {
-    transports: ["websocket"],
-  });
   useEffect(() => {
     map = new naver.maps.Map(container.current, {
       center: new naver.maps.LatLng(37.560518, 127.085579),
@@ -52,37 +49,37 @@ const Record = () => {
       },
     });
     //https 통신
-    HttpsService.viewAllCCTV().then((response) => {
-      // console.log(response.data);
-      // response.data.CCTV.map((obj) => {
-      makeMarker(
-        map,
-        response.data.CCTV,
-        detectData,
-        setDetectData,
-        setModalOpen,
-        setBlur,
-        "_dot"
-      );
-      // });
+    // HttpsService.viewAllCCTV().then((response) => {
+    //   // console.log(response.data);
+    //   response.data.CCTV.map((obj) => {
+    makeMarker(
+      map,
+      response.CCTV,
+      detectData,
+      setDetectData,
+      setModalOpen,
+      setBlur,
+      "_dot"
+    );
+    // });
+    // HttpsService.viewAllRecord()
+    //   .then((response) => {
+    //     // console.log(response.data.HumanAction);
+    //     response.data.HumanAction.map((obj) => {
+    response.HumanAction.map((obj) => {
+      setList((prev) => [...prev, getElem(obj, "api")]);
+      //   setSocketData(getElem(obj));
+      console.log(list);
     });
-    HttpsService.viewAllRecord()
-      .then((response) => {
-        // console.log(response.data.HumanAction);
-        response.data.HumanAction.map((obj) => {
-          setList((prev) => [...prev, getElem(obj, "api")]);
-          //   setSocketData(getElem(obj));
-          console.log(list);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
     setloading(false);
 
-    // const socket = io("localhost:5000", {
-    //   transports: ["websocket"],
-    // });
+    const socket = io("localhost:5000", {
+      transports: ["websocket"],
+    });
     //소켓통신
     socket.connect();
     // client-side
