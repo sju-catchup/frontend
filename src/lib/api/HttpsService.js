@@ -1,6 +1,5 @@
 import axios from "axios";
-const BASE_URL =
-  "http://ec2-15-164-233-153.ap-northeast-2.compute.amazonaws.com:4000";
+const BASE_URL = "http://15.164.233.153:4000";
 class HttpsService {
   viewAllCCTV() {
     return axios.get(BASE_URL + "/cctv", {
