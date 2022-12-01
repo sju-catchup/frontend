@@ -93,10 +93,14 @@ const Record = () => {
       console.log("disconnect");
     });
     socket.on("New_HumanAction", (data) => {
+      setList((list) => {
+        return;
+      });
       setSocketData(getElem(data.HumanAction, "socket"));
     });
     setloading(false);
   }, []);
+
   useEffect(() => {
     console.log({ list });
     const idx = list.findIndex((i) => i.id == socketData.id);
