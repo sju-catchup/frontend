@@ -37,9 +37,12 @@ const Record = () => {
     setModalOpen(false);
     setBlur(false);
   };
-  const socket = io("http://15.164.233.153:3000", {
-    transports: ["websocket"],
-  });
+  const socket = io(
+    "http://ec2-15-164-233-153.ap-northeast-2.compute.amazonaws.com:3000",
+    {
+      transports: ["websocket"],
+    }
+  );
   useEffect(() => {
     map = new naver.maps.Map(container.current, {
       center: new naver.maps.LatLng(37.560518, 127.085579),
