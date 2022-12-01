@@ -112,7 +112,14 @@ const Detection = () => {
       setTrackingPath([
         new naver.maps.LatLng(suspectData.lat, suspectData.lng),
       ]); //tpath 초기화
-      var postSort = prevSortPosition.sort(function (a, b) {
+      const newArray = prevSortPosition.reduce(function (acc, current) {
+        if (acc.findIndex(({ id }) => id === current.id) === -1) {
+          acc.push(current);
+        }
+        return acc;
+      }, []);
+
+      var postSort = newArray.sort(function (a, b) {
         //시간 순 정렬
         let x = parseInt(a.time);
         let y = parseInt(b.time);
@@ -131,6 +138,7 @@ const Detection = () => {
       console.log("same" + socketData.id);
     }
   }, [socketData]);
+  useEffect(() => {});
   useEffect(() => {
     console.log({ list });
     makeMarker(map, list, setId, setUri, setModalOpen, setBlur); //마커 만들기
