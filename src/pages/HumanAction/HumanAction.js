@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "react-tabulator/lib/styles.css"; // required styles
 import "react-tabulator/lib/css/tabulator_semanticui.min.css"; // theme
 import { ReactTabulator } from "react-tabulator";
+import MediaQuery from "react-responsive";
 import { io } from "socket.io-client";
 
 import "index.scss";
@@ -14,7 +15,6 @@ import styles from "./humanAction.module.scss";
 import { getElem, makeMarker } from "lib/utils/forHumanaction";
 import { columns, initialSort } from "assets/TableColumn.js";
 import HttpsService from "lib/api/HttpsService";
-// import response from "assets/data.json";
 
 const { naver } = window;
 var map;
@@ -37,7 +37,7 @@ const Record = () => {
     setModalOpen(false);
     setBlur(false);
   };
-  const socket = io("http://15.164.233.153:3000", {
+  const socket = io("https://ws.rojiwon.kr", {
     transports: ["websocket"],
   });
   useEffect(() => {
@@ -53,8 +53,6 @@ const Record = () => {
     });
     //https 통신
     HttpsService.viewAllCCTV().then((response) => {
-      // console.log(response.data);
-      // response.data.CCTV.map((obj) => {
       makeMarker(
         map,
         response.data.CCTV,
@@ -64,15 +62,12 @@ const Record = () => {
         setBlur,
         "_dot"
       );
-      // });
     });
     HttpsService.viewAllRecord()
       .then((response) => {
-        // console.log(response.data.HumanAction);
+        console.log(response.data.HumanAction);
         response.data.HumanAction.map((obj) => {
           setList((prev) => [...prev, getElem(obj, "api")]);
-          //   setSocketData(getElem(obj));
-          console.log(list);
         });
       })
       .catch((error) => {
@@ -80,9 +75,6 @@ const Record = () => {
       });
     setloading(false);
 
-    // const socket = io("localhost:5000", {
-    //   transports: ["websocket"],
-    // });
     //소켓통신
     socket.connect();
     // client-side
@@ -125,18 +117,20 @@ const Record = () => {
       <main className="contents">
         <section className={blur ? styles.blur : ""}>
           <header>
-            <h1>이상행동 기록 조회</h1>
+            <h1>이상행동 탐지 조회</h1>
           </header>
           <div className={styles.container}>
             <div id={"map"} ref={container} className={styles.map}></div>
             {loading ? (
               ""
             ) : (
-              <ReactTabulator
-                columns={columns}
-                initialSort={initialSort}
-                data={list}
-              />
+              <MediaQuery minWidth={768}>
+                <ReactTabulator
+                  columns={columns}
+                  initialSort={initialSort}
+                  data={list}
+                />
+              </MediaQuery>
             )}
           </div>
         </section>

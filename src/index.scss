@@ -1,3 +1,6 @@
+* {
+  font-size: 14px;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -53,14 +56,8 @@ code {
     line-height: 22px;
     font-weight: 550;
   }
-  &:hover {
-    transform: scale(1.2) rotate(405deg);
-    font-size: 24px;
-    box-shadow: 1px 1px 1px gray;
-  }
 }
 #cctv_marker_number {
-  // margin-top: 20px;
   background-color: black;
   color: black;
 }
@@ -86,6 +83,15 @@ code {
     font-weight: 550;
   }
 }
+#upper_marker {
+  width: 110px;
+  display: flex !important;
+  justify-content: flex-start;
+  #time {
+    text-shadow: -1px 0 2px #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+    font-weight: bold;
+  }
+}
 #cctv_marker_icon {
   text-align: center;
   width: 25px;
@@ -107,8 +113,6 @@ code {
 .tabulator {
   margin-top: 0 !important;
 }
-// .tabulator-row .tabulator-cell[tabulator-field="id"],
-// tabulator-col-title:first-child {
-//   width: 10% !important;
-//   background-color: red;
-// }
+.tabulator-col-content {
+  font-size: 16px;
+}

@@ -25,8 +25,6 @@ function Modal({
   suspectData,
   setBlur,
 }) {
-  // console.log(suspectData);
-  // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const modalBody = useRef();
   const [isLoading, setIsLoading] = useState(true);
   const [suspectList, setSuspectList] = useState([]);
@@ -34,7 +32,7 @@ function Modal({
   const [modalOpen, setModalOpen] = useState(false);
   const [url, setUrl] = useState();
   const onClickSubject = (e) => {
-    setUrl(e.target.src); //e.target은 img
+    setUrl(e.target.src);
     setSuspectId(e.target.id);
     setModalOpen(true);
     close();
@@ -44,13 +42,6 @@ function Modal({
     setModalOpen(false);
     setBlur(false);
   };
-  // useEffect(() => {
-  //   setSuspectList(response.Suspect);
-  //   console.log(suspectData.start, suspectData.end);
-  //   setIsLoading(false);
-  // }, []);
-
-  //api
   if (open) {
     HttpsService.findAllSuspect(
       suspectData.cctv_id,
@@ -66,7 +57,6 @@ function Modal({
       });
   }
   return (
-    // 모달이 열릴때 openModal 클래스가 생성된다.
     <>
       <div className={open ? "openModal modal" : "modal"}>
         {open ? (
@@ -79,10 +69,8 @@ function Modal({
             </header>
             <main ref={modalBody}>
               <iframe
-                width="500"
-                height="350"
                 src={suspectData.url}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;mute=1"
                 allowFullScreen
               ></iframe>
               <div className="subjectList">

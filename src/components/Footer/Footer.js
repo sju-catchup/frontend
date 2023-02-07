@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="container footer">
@@ -8,24 +7,20 @@ const Footer = () => {
 
         <ul className="nav col-md-4 justify-content-end">
           <li className="nav-item">
-            <Link to="#" className="nav-link px-2 text-muted">
-              Home
-            </Link>
+            <a
+              href="https://github.com/sju-catchup"
+              className="nav-link px-2 text-muted"
+            >
+              Github
+            </a>
           </li>
           <li className="nav-item">
-            <Link to="#" className="nav-link px-2 text-muted">
-              Features
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="#" className="nav-link px-2 text-muted">
-              FAQs
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="#" className="nav-link px-2 text-muted">
-              About
-            </Link>
+            <a
+              href="https://www.notion.so/fourdori/CatchUP-57b171733a9c4ea4bebe1e4c40a5effd"
+              className="nav-link px-2 text-muted"
+            >
+              Notion
+            </a>
           </li>
         </ul>
       </footer>

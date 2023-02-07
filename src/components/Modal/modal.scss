@@ -1,4 +1,5 @@
 .modal {
+  margin-top: 5.5vh;
   display: none;
   position: fixed;
   top: 0;
@@ -14,23 +15,19 @@
   border: 0;
 }
 .modal > section {
-  width: 90%;
   width: 600px;
   margin: 0 auto;
   padding: 25px 49px;
   border-radius: 0.3rem;
   border: 1px solid white;
-  // background-color: black;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
   overflow: hidden;
 }
 .modal > section > header {
   position: relative;
-  // padding: 24px 64px 16px 16px;
   padding: 15px 0;
   font-size: 25px;
-  // background-color: #f1f1f1;
   font-weight: 500;
   color: white;
   button {
@@ -43,14 +40,19 @@
   }
 }
 .modal > section > main {
-  // max-height: 600px;
-  // overflow-y: scroll;
+  iframe {
+    height: 250px;
+    width: 100%;
+  }
   text-align: center;
   .subjectList {
     margin-top: 10px;
     text-align: start;
     overflow-y: scroll;
-    max-height: 250px;
+    max-height: 30vh;
+    @media (max-width: 767px) {
+      text-align: center;
+    }
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -76,17 +78,16 @@
         object-fit: cover;
         object-position: top;
       }
-      // }
     }
   }
   //두 번째 모달
   .subject {
     img {
       width: 280px;
-      height: 530px;
+      height: 45vh;
       object-fit: cover;
       object-position: top;
-      margin: 20px 0;
+      margin: 15px 0;
     }
   }
 
@@ -96,7 +97,7 @@
     button,
     a {
       width: 190px;
-      height: 60px;
+      height: 55px;
       background: none;
       border: 1.5px solid white;
       color: white;
@@ -104,7 +105,7 @@
     }
     a {
       text-decoration: none;
-      line-height: 56px;
+      line-height: 50px;
     }
   }
 }
@@ -116,14 +117,12 @@
 .modal > section > footer button {
   padding: 6px 12px;
   color: #fff;
-  // background-color: #6c757d;
   border-radius: 5px;
   font-size: 13px;
 }
 .modal.openModal {
   display: flex;
   align-items: center;
-  /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-bg-show 0.3s;
 }
 .detection > section {

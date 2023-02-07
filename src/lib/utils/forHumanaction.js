@@ -13,7 +13,8 @@ export function getElem(obj, method) {
     type: obj.type,
     createdAt: obj.createdAt,
     date: moment(obj.start_time).format("YY.MM.DD"),
-    start_time: setTimeFormat(obj.start_time),
+    start_time:
+      setDateFormat(obj.start_time) + " " + setTimeFormat(obj.start_time),
     end_time: setTimeFormat(obj.end_time),
     url: obj.url,
     cctv_id: obj.cctv.id,
@@ -136,14 +137,14 @@ export function makeMarker(
     ].join("");
     const marker = new naver.maps.Marker({
       map,
-      title: "Green",
+      title: obj.address,
       position: markerPosition,
       icon: {
         content: excontent,
         size: new naver.maps.Size(10, 10),
         anchor: new naver.maps.Point(19, 58),
       },
-      draggable: true,
+      draggable: false,
       idValue: obj.cctv_id,
       urlValue: obj.url,
       startValue: obj.start,
@@ -152,7 +153,7 @@ export function makeMarker(
       latValue: obj.lat,
     });
     if (type === "_number") {
-      marker.addListener("click", function (e) {
+      naver.maps.Event.addListener(marker, "click", function (e) {
         //obj.id로 api 요청
         setDetectData({
           ...detectData,
@@ -165,7 +166,27 @@ export function makeMarker(
         });
         setModalOpen(true);
         setBlur(true);
+        console.log(e.overlay.idValue);
+        var pos = marker.getPosition();
+        map.panTo(pos);
       });
+      if (window.innerWidth < 768) {
+        naver.maps.Event.addListener(marker, "drag", function (e) {
+          setDetectData({
+            ...detectData,
+            cctv_id: e.overlay.idValue,
+            url: e.overlay.urlValue,
+            start: e.overlay.startValue,
+            end: e.overlay.endValue,
+            lat: parseFloat(e.overlay.latValue),
+            lng: parseFloat(e.overlay.lngValue),
+          });
+          setModalOpen(true);
+          setBlur(true);
+          var pos = marker.getPosition();
+          map.panTo(pos);
+        });
+      }
     }
   }
 }

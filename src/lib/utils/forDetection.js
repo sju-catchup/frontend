@@ -4,7 +4,6 @@ import { setDateFormat, setTimeFormat } from "lib/utils/forHumanaction";
 import moment from "moment";
 import "moment/locale/ko";
 export function setTable(obj) {
-  console.log({ obj });
   return {
     order: "",
     id: obj.id,
@@ -25,7 +24,6 @@ export function setPath(obj) {
 export function setMarker(map, obj, id, url, i, position) {
   return new naver.maps.Marker({
     map,
-    // title: obj.cctv.address,
     title: "d",
     position: position,
     icon: {
@@ -44,79 +42,42 @@ export function setMarker(map, obj, id, url, i, position) {
     uriValue: url,
   });
 }
-// export function makeMarker(map, id, url, i, position) {
-//   console.log("마커그리기" + id);
-//   return new naver.maps.Marker({
-//     map,
-//     // title: obj.cctv.address,
-//     title: "d",
-//     position: position,
-//     icon: {
-//       content: [
-//         '<div id="cctv_marker_icon" >',
-//         "<div>",
-//         i,
-//         "</div>",
-//         "<img src='" + warn + "'/>",
-//         "</div>",
-//       ].join(""),
-//       size: new naver.maps.Size(50, 50),
-//       anchor: new naver.maps.Point(12, 37),
-//     },
-//     draggable: true,
-//     idValue: id,
-//     uriValue: url,
-//   });
-// }
-// useEffect(() => {
-//   var marker;
-//   const order = detectionOrder.current;
-//   console.log({ socketData });
-//   marker = makeMarker(
-//     map,
-//     socketData.id,
-//     socketData.url,
-//     order,
-//     new naver.maps.LatLng(socketData.lat, socketData.lng)
-//   );
-//   marker.addListener("click", function (e) {
-//     //obj.id로 api 요청
-//     setId(e.overlay.idValue);
-//     setUri(e.overlay.uriValue);
-//     setModalOpen(true);
-//     setBlur(true);
-//   });
-//   // setTrackingPath((prev) => [
-//   //   ...prev,
-//   //   new naver.maps.LatLng(socketData.lat, socketData.lng),
-//   // ]);
-//   // p.push(new naver.maps.LatLng(socketData.lat, socketData.lng));
-// }, [list]);
 export function makeMarker(map, list, setId, setUri, setModalOpen, setBlur) {
   for (let i = 0; i < list.length; i++) {
+    console.log(list[i]);
     var obj = list[i];
+    var date = list[i].start_time.split(" ")[0];
+    var time = list[i].start_time.split(" ")[1];
     var marker = new naver.maps.Marker({
       map,
-      // title: obj.cctv.address,
-      title: "d",
+      title: obj.address,
       position: new naver.maps.LatLng(obj.lat, obj.lng),
       icon: {
         content: [
+          "<div id='upper_marker'>",
           '<div id="cctv_marker_number_blue" >',
           "<div>",
           list[i].order,
+          "</div>",
+          "</div>",
+          "<div id='time'>",
+          "<div>",
+          date,
+          "</div>",
+          "<div>",
+          time,
+          "</div>",
           "</div>",
           "</div>",
         ].join(""),
         size: new naver.maps.Size(50, 50),
         anchor: new naver.maps.Point(12, 37),
       },
-      draggable: true,
+      draggable: false,
       idValue: obj.id,
       uriValue: obj.url,
     });
     marker.addListener("click", function (e) {
-      //obj.id로 api 요청
       setId(e.overlay.idValue);
       setUri(e.overlay.uriValue);
       setModalOpen(true);

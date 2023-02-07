@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
 import "./modal.scss";
-// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line react/prop-types, no-unused-vars
 function Modal({ open, close, header, id, uri }) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const modalBody = useRef();
-  console.log({ id });
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <>
@@ -19,10 +18,8 @@ function Modal({ open, close, header, id, uri }) {
             </header>
             <main ref={modalBody}>
               <iframe
-                width="500"
-                height="350"
                 src={uri}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;mute=1"
                 allowfullscreen
               ></iframe>
             </main>

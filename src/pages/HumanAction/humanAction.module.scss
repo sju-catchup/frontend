@@ -1,16 +1,26 @@
 .tabulator {
   display: inline-block;
-  width: 50%;
+  // width: 45%;
   margin: 0 !important;
+  padding: 0;
 }
 .map {
-  height: 700px;
-  width: 40%;
+  height: 70vh;
+  width: calc(45% - 10px);
   float: left;
   padding: 10px;
   border: 1px solid gray;
 }
+@media (max-width: 767px) {
+  .map {
+    width: 100%;
+  }
+}
 .container {
+  margin: 0 !important;
+  width: auto;
+  padding: 0;
+  display: block;
   > div:nth-child(2) {
     width: 55%;
     display: inline-block;
@@ -31,25 +41,6 @@
   filter: blur(5px);
   -webkit-filter: blur(5px);
 }
-// .mapp {
-//   height: 700px;
-//   width: 90%;
-// }
-// .spinner {
-//   display: inline-block;
-//   position: absolute;
-// }
-// .loading {
-//   .map {
-//     width: 50% !important;
-//     margin: 0 25%;
-//   }
-//   .container {
-//     margin: 0 auto;
-//     text-align: center;
-//     width: 100%;
-//   }
-// }
 .dodbogi {
   width: 150px;
   z-index: 1000;
@@ -97,5 +88,6 @@
     height: 250px;
     object-fit: cover;
     object-position: top;
+    z-index: 10000000000;
   }
 }

@@ -13,16 +13,11 @@ function Modal({
   suspectId,
   url,
 }) {
-  // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  // const navigate = useNavigate();
   function selectAgain() {
     setPrevModalOpen(true);
     closeModal();
     setBlur(true);
   }
-  // function selectSubject() {
-  //   navigate("/detection/" + id + "/" + suspectId, { state: partialUser });
-  // }
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={openModal ? "openModal modal" : "modal"}>
@@ -39,9 +34,8 @@ function Modal({
               <img src={url} alt="subject" />
             </div>
             <div className="subjectSelect">
-              {/* <button onClick={selectSubject}>추적하기</button> */}
               <Link
-                to={"/detection/" + suspectData.id + "/" + suspectId}
+                to={"/detection/" + suspectId}
                 state={{ suspectImgUrl: url, suspectData: suspectData }}
               >
                 추적하기

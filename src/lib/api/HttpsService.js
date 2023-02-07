@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://15.164.233.153:4000";
+const BASE_URL = "https://api.rojiwon.kr";
 class HttpsService {
   viewAllCCTV() {
     return axios.get(BASE_URL + "/cctv", {
@@ -21,7 +21,6 @@ class HttpsService {
       start_time: start,
       end_time: end,
     };
-    // console.log("http: " + id, start, end);
     return axios.post(BASE_URL + "/tracking/suspect", data, {
       headers: {
         "Access-Control-Allow-Origin": "*",
